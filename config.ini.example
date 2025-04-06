@@ -1,0 +1,8 @@
+[Google Sheets]
+spreadsheet_id = YOUR_SPREADSHEET_ID_HERE
+sheet_name = YOUR_SHEET_NAME_HERE
+credentials_file = PASS_TO_YOUR_CREDENTIALS_FILE
+
+[Application]
+max_results = 12
+debug_mode = false
