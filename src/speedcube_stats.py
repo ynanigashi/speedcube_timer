@@ -1,9 +1,10 @@
 class SpeedcubeStats:
-    @staticmethod
-    def calculate_average(times, n):
-        if len(times) < n:
+    def calculate_average(self, results, n):
+        if len(results) < n:
             return None
-        recent_times = [time for _, time in times[-n:]]
+        
+        # タプルの2番目の要素（time）のみを使用
+        recent_times = [result[1] for result in results[-n:]]
         return sum(recent_times) / len(recent_times)
 
     def format_average(self, value):

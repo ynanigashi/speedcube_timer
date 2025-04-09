@@ -1,6 +1,7 @@
 import gspread
 import configparser
 import datetime
+import os
 from gspread.exceptions import APIError
 
 class SpeedcubeLoggerError(Exception):
@@ -16,9 +17,13 @@ class SpeedcubeLoggerError(Exception):
 class SpeedcubeLogger:
     def __init__(self):
         try:
+            # プロジェクトのルートディレクトリのパスを取得
+            root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            config_path = os.path.join(root_dir, 'config.ini')
+
             # config.iniから設定を読み込む
             config = configparser.ConfigParser()
-            config.read('config.ini', encoding='utf-8')
+            config.read(config_path, encoding='utf-8')
 
             spreadsheet_key = config['GoogleSpreadsheet']['spreadsheet_key']
             sheet_name = config['GoogleSpreadsheet']['sheet_name']

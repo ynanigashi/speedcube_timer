@@ -5,6 +5,7 @@ class SpeedcubeTimer:
     def __init__(self):
         self.results = []
         self.MAX_RESULTS = 12
+        self.solve_count = 1  # 1からカウント開始
 
     def start(self):
         input("エンターを押してタイマーをスタートします...")
@@ -20,9 +21,18 @@ class SpeedcubeTimer:
         return elapsed_time
 
     def add_result(self, scramble, time):
-        self.results.append((scramble, time))
+        """新しい結果を追加し、解いた回数をカウントアップ"""
+        self.results.append((scramble, time, self.solve_count))
+        # 最大結果数を超えた場合、古い結果を削除
         if len(self.results) > self.MAX_RESULTS:
             self.results.pop(0)
+        
+        # 解いた回数をインクリメント
+        self.solve_count += 1
 
     def get_recent_results(self):
         return self.results[::-1]
+
+    def get_solve_count(self):
+        """合計解いた回数を返す"""
+        return self.solve_count
