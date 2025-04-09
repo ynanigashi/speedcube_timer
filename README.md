@@ -1,113 +1,92 @@
 # Speedcube Timer
 
-WCAルールに準拠したスピードキューブタイマーアプリケーションです。Pyxelを使用したGUIインターフェース、インスペクションタイム、音声フィードバック機能を備えています。
+WCAルールに準拠したスピードキューブタイマーアプリケーションです。Pyxelを使用したGUIインターフェースで、インスペクションタイム、音声フィードバック機能を備えています。
 
 ## 機能
 
-- WCAルールに準拠したインスペクションタイム（15秒）
-- GUIベースのリアルタイム計測
+- WCAルールに準拠したタイマー機能
+  - インスペクションタイム（15秒）
+  - スペースキー長押しでスタート
+  - スペースキーでストップ
 - 音声フィードバック
-  - インスペクション時のカウントダウン音
-  - タイマー開始音
-  - 計測終了音
-- 最新5回の記録表示
-- AO5（直近5回の平均）とAO12（直近12回の平均）の自動計算
-- 試技回数のカウント
-- Google Spreadsheetsへの自動記録保存
-- カスタムフォントによる大きな数字表示
+  - インスペクション開始音
+  - カウントダウンビープ（残り3,2,1秒）
+  - タイマー開始・終了音
+- スクランブル生成と表示
+- 記録管理
+  - 最新5回の記録表示
+  - AO5（直近5回の平均）計算
+  - AO12（直近12回の平均）計算
+  - 試技回数のカウント
+- Google Spreadsheetsへの記録保存
 
-## インストールと実行
+## 必要要件
 
-### 環境構築（初回のみ）
+- Python 3.10以上
+- Pyxel 1.9.0以上
+- gspread（Googleスプレッドシート連携用）
 
-1. Python 3.10以上をインストール
-2. リポジトリをクローンまたはダウンロード
-3. 仮想環境の作成と有効化：
+## インストール手順
+
+1. リポジトリのクローン
+
+
+2. 仮想環境の作成と有効化
 ```bash
 python -m venv .venv
-.\.venv\Scripts\activate
+.venv\Scripts\activate
 ```
 
-4. 必要なパッケージのインストール：
+3. 必要パッケージのインストール
 ```bash
-python -m pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
-### Google Cloud Platformの設定
-
-1. Google Cloud Platformでプロジェクトを作成
-2. Google Sheets APIを有効化
-3. サービスアカウントを作成し認証情報をダウンロード
-4. `credentials.json`をプロジェクトルートに配置
-
-### 設定ファイルの準備
-
-1. 設定ファイルのテンプレートをコピー：
-```bash
-copy config.ini.example config.ini
-```
-
-2. `config.ini`を編集：
-   - スプレッドシートID
-   - シート名
-   - 認証ファイルのパス
-
-### アプリケーションの実行
-
-```bash
-# 仮想環境が有効でない場合は有効化
-.\.venv\Scripts\activate
-
-# アプリケーションの起動
-python main_gui.py
-```
-
-または、同梱のバッチファイルを使用：
-```bash
-run.bat
-```
+4. Google Sheets APIの設定（オプション）
+   - Google Cloud ConsoleでプロジェクトとAPI認証情報を作成
+   - 認証情報JSONファイルを`credentials.json`として保存
+   - `config.ini.example`を`config.ini`にコピーし、必要な情報を入力
 
 ## 使用方法
 
-1. スペースキーを0.5秒長押し → インスペクション開始
-2. インスペクション中（15秒）：
-   - スペースキー長押しでタイマー開始
-   - 15秒経過で自動開始
-3. 計測中はタイムを大きく表示
-4. スペースキーでタイマー停止
-5. ESCキーで終了
+1. タイマーの起動
+```bash
+python main.py
+```
 
-## 画面レイアウト
+2. 基本操作
+   - スペースキーを0.5秒長押し → インスペクション開始
+   - インスペクション中のスペースキー長押し → タイマー開始
+   - タイマー停止はスペースキー
+   - ESCキーで終了
 
-- 上部：スクランブル表示
-- 中央：タイマー表示（大きな数字）
-- 左下：直近5回の記録
-- 右下：AO5、AO12の表示
-
-## ファイル構成
+## プロジェクト構成
 
 ```
 speedcube_timer/
 ├── src/
 │   ├── gui/
 │   │   ├── __init__.py
-│   │   └── app.py       # GUIアプリケーション
+│   │   ├── app.py          # メインアプリケーション
+│   │   ├── constants.py    # 設定定数
+│   │   ├── renderer.py     # 描画処理
+│   │   └── states.py       # 状態管理
 │   ├── __init__.py
-│   ├── timer.py         # タイマー機能
+│   ├── timer.py           # タイマー機能
 │   ├── speedcube_stats.py # 統計計算
-│   ├── scramble.py      # スクランブル生成
-│   └── log_handler.py   # ログ保存
-├── main_gui.py         # エントリーポイント
-├── requirements.txt    # 依存パッケージ
-├── config.ini.example  # 設定ファイルテンプレート
+│   ├── scramble.py        # スクランブル生成
+│   └── log_handler.py     # ログ保存
+├── main.py               # エントリーポイント
+├── requirements.txt      # 依存パッケージ
+├── config.ini.example    # 設定ファイルテンプレート
 └── README.md
 ```
 
 ## 開発環境
 
-- Python 3.10以上
-- 必要なライブラリ:
-  - pyxel: GUIとタイマー制御
-  - gspread: Google Spreadsheetsとの連携
-  - google-auth: Google認証
-  - google-auth-oauthlib: OAuth認証
+- Windows 11
+- Python 3.10
+- VS Code
+- Pyxel 2.3.18
+- gspread 6.2.0
+
