@@ -93,12 +93,12 @@ class SpeedcubeRenderer:
     def _draw_recent_results(self, timer) -> None:
         """直近の記録表示"""
         pyxel.text(DC.MARGIN_X, DC.RESULTS_Y, TC.RECENT, 7, self.middle_font)
-        next_result_y = DC.RESULTS_Y + DC.MIDDLE_FONT_HEIGHT + DC.FONT_SPACING
+        next_result_y = DC.RESULTS_Y + DC.MIDDLE_FONT_HEIGHT + DC.FONT_SPACING_Y
         
         for i, (_, time, solve_count) in enumerate(timer.get_recent_results()[:5]):
             result_text = TC.SOLVE_FORMAT.format(solve_count, time)
             pyxel.text(DC.MARGIN_X, next_result_y, result_text, 7, self.middle_font)
-            next_result_y += DC.MIDDLE_FONT_HEIGHT + DC.FONT_SPACING
+            next_result_y += DC.MIDDLE_FONT_HEIGHT + DC.FONT_SPACING_Y
 
     def _draw_averages(self, stats, timer) -> None:
         """平均値の表示"""
@@ -110,8 +110,8 @@ class SpeedcubeRenderer:
         
         stats_x = DC.WINDOW_WIDTH // 2 + DC.MARGIN_X // 2
         pyxel.text(stats_x, DC.RESULTS_Y, TC.AVERAGE, 7, self.middle_font)
-        ao5_y = DC.RESULTS_Y + DC.MIDDLE_FONT_HEIGHT + DC.FONT_SPACING
-        ao12_y = ao5_y + DC.MIDDLE_FONT_HEIGHT + DC.FONT_SPACING
+        ao5_y = DC.RESULTS_Y + DC.MIDDLE_FONT_HEIGHT + DC.FONT_SPACING_Y
+        ao12_y = ao5_y + DC.MIDDLE_FONT_HEIGHT + DC.FONT_SPACING_Y
         pyxel.text(stats_x, ao5_y, ao5_text, 7, self.middle_font)
         pyxel.text(stats_x, ao12_y, ao12_text, 7, self.middle_font)
 
