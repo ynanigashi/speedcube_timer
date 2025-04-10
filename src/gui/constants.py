@@ -16,7 +16,8 @@ class DisplayConfig:
     LARGE_FONT_FILE = f"{FONT_PATH}/umplus_j12r.bdf"
 
     # レイアウト
-    FONT_SPACING = 5
+    FONT_SPACING_X = 1
+    FONT_SPACING_Y = 5
     MARGIN_X = 20
     MARGIN_Y = 10
         
@@ -26,7 +27,7 @@ class DisplayConfig:
     
     # 縦方向の位置（上マージンを考慮して調整）
     SCRAMBLE_Y = MARGIN_Y
-    SCRAMBLE_TEXT_Y = SCRAMBLE_Y + MIDDLE_FONT_HEIGHT + FONT_SPACING
+    SCRAMBLE_TEXT_Y = SCRAMBLE_Y + MIDDLE_FONT_HEIGHT + FONT_SPACING_Y
     TIMER_Y = SCRAMBLE_TEXT_Y + MIDDLE_FONT_HEIGHT + MARGIN_Y * 3
     RESULTS_Y = TIMER_Y + LARGE_FONT_HEIGHT + MARGIN_Y * 3
 
@@ -39,8 +40,8 @@ class DisplayConfig:
     BLINK_ON_TIME = 40  # 1サイクル中の表示時間
     
     # 画面幅の計算
-    # スクランブル最大40文字 × (フォント幅5 + 文字間隔5) + 左右マージン20×2
-    WINDOW_WIDTH = 40 * (MIDDLE_FONT_WIDTH + FONT_SPACING) + MARGIN_X * 2
+    # フォント幅 * スクランブル最大59文字 + フォントスペース * 19 + 左右マージン20×2
+    WINDOW_WIDTH = MIDDLE_FONT_WIDTH * 59 +  FONT_SPACING_X * 58 + MARGIN_X * 2
     WINDOW_HEIGHT = 240
     
     FPS = 60  # FPSをクラス定数として定義
