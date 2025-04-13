@@ -2,6 +2,12 @@
 
 class DisplayConfig:
     """画面表示に関する設定"""
+    # 色
+    DEFAULT_BACKGROUND_COLOR = 1  # 紺色
+    DEFAULT_TEXT_COLOR = 7  # 白色
+    DEFAULT_WARNING_COLOR = 8  # 赤色（4秒以下警告用）
+    DEFAULT_BLINK_COLOR = 7  # 白色（点滅表示用）
+
     # フォントサイズ
     SMALL_FONT_WIDTH = 4
     SMALL_FONT_HEIGHT = 8
@@ -22,7 +28,7 @@ class DisplayConfig:
     MARGIN_Y = 10
         
     INSPECTION_TIME = 15.0  # WCAルールの15秒
-    SPACE_HOLD_TIME = 0.5  # スペースキー長押しの必要時間
+    SPACE_HOLD_TIME = 0.3  # スペースキー長押しの必要時間
     COUNTDOWN_BEEP_TIMES = [3, 2, 1, 0]  # ピッ音を鳴らすタイミング（残り秒数）
     
     # 縦方向の位置（上マージンを考慮して調整）
@@ -73,12 +79,8 @@ class SoundConfig:
     """サウンド関連の定数"""
     BEEP_CHANNEL = 0
     
-    # サウンド設定
-    COUNTDOWN_BEEP = ("a3", "p", "3", "n", 5)    # ピッ音（低音）
-    START_BEEP = ("a4", "p", "5", "n", 10)       # ポーン音（高音）
-    FINISH_BEEP = ("c3e3g3c4", "s", "7", "n", 10)  # コイン音
-
     # サウンドインデックス
     COUNTDOWN_SOUND = 0
     START_SOUND = 1
     FINISH_SOUND = 2
+    COIN_SOUND = 3

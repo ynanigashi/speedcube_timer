@@ -1,6 +1,5 @@
 """スピードキューブタイマーのメインアプリケーション"""
 import pyxel
-from enum import Enum, auto
 from ..timer import SpeedcubeTimer
 from ..speedcube_stats import SpeedcubeStats
 from ..scramble import generate_wca_cube_scramble
@@ -16,24 +15,27 @@ class SpeedcubeApp:
         pyxel.init(DC.WINDOW_WIDTH, DC.WINDOW_HEIGHT, 
                   title="Speedcube Timer", fps=DC.FPS)
         
-        # サウンドの初期化
-        pyxel.sounds[SC.COUNTDOWN_SOUND].set(*SC.COUNTDOWN_BEEP)
-        pyxel.sounds[SC.START_SOUND].set(*SC.START_BEEP)
-        pyxel.sounds[SC.FINISH_SOUND].set(*SC.FINISH_BEEP)
+        # load assets
+        pyxel.load('speedcube_timer.pyxres')
         
         # コンポーネントの初期化
         self.timer = SpeedcubeTimer()
         self.stats = SpeedcubeStats()
         self.logger = SpeedcubeLogger()
-        self.renderer = SpeedcubeRenderer()
         
         # 状態の初期化
+        self.bg_color = DC.DEFAULT_BACKGROUND_COLOR
+        self.text_color = DC.DEFAULT_TEXT_COLOR
+        self.warning_color = DC.DEFAULT_WARNING_COLOR
         self.state = TimerState.READY
         self.space_hold_start = 0
         self.countdown_start = 0
         self.start_time = 0
         self.current_time = 0.0
         self.scramble = generate_wca_cube_scramble()
+        
+        # レンダラーの初期化（自身を渡す）
+        self.renderer = SpeedcubeRenderer(self)
 
         # Pyxelの実行
         pyxel.run(self.update, self.draw)
@@ -43,6 +45,10 @@ class SpeedcubeApp:
         if pyxel.btnp(pyxel.KEY_ESCAPE):
             pyxel.quit()
             
+        if pyxel.btnp(pyxel.KEY_C):
+            self.bg_color = (self.bg_color + 1) % 16
+            self.text_color = 7 if self.bg_color < 6 else 0
+        
         match self.state:
             case TimerState.READY:
                 self._update_ready_state()
@@ -53,7 +59,7 @@ class SpeedcubeApp:
 
     def draw(self):
         """描画処理を実行"""
-        self.renderer.draw(self.state, self)
+        self.renderer.draw(self.state)
 
     def _update_ready_state(self):
         """READY状態の更新処理"""
@@ -63,7 +69,7 @@ class SpeedcubeApp:
             elif (pyxel.frame_count - self.space_hold_start) / DC.FPS >= GC.SPACE_HOLD_TIME:
                 self.state = TimerState.COUNTDOWN
                 self.countdown_start = pyxel.frame_count
-                pyxel.play(SC.BEEP_CHANNEL, SC.START_SOUND)
+                pyxel.play(SC.BEEP_CHANNEL, SC.COIN_SOUND)
                 self.space_hold_start = 0
         else:
             self.space_hold_start = 0
