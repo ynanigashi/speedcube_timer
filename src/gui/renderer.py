@@ -25,6 +25,8 @@ class SpeedcubeRenderer:
                 self._draw_countdown_state()
             case TimerState.RUNNING:
                 self._draw_running_state()
+            case TimerState.FINISHED:
+                self._draw_finished_state()  # 新しい描画処理
         
         self._draw_quit_message()
 
@@ -46,8 +48,9 @@ class SpeedcubeRenderer:
         time_x = (DC.WINDOW_WIDTH - len(f"{countdown_time:.1f}") * DC.LARGE_FONT_WIDTH) // 2
         pyxel.text(time_x, DC.TIMER_Y, f"{countdown_time:.1f}", color, self.large_font)
         
-        # ホールド状態表示
+        # ホールド状態の描画
         if self.app.space_hold_start > 0:
+            self._draw_progress_circle()
             self._draw_hold_time()
 
     def _draw_running_state(self) -> None:
@@ -62,6 +65,14 @@ class SpeedcubeRenderer:
         pyxel.text(time_x, DC.TIMER_Y, f"{self.app.current_time:.2f}", 
                    self.app.text_color, self.large_font)
 
+    def _draw_finished_state(self) -> None:
+        """FINISHED状態の描画"""
+        # 結果を大きく表示
+        time_x = (DC.WINDOW_WIDTH - len(f"{self.app.current_time:.2f}") * DC.LARGE_FONT_WIDTH) // 2
+        pyxel.text(time_x, DC.TIMER_Y, f"{self.app.current_time:.2f}", 
+                   self.app.text_color, self.large_font)
+
+
     def _draw_scramble(self, scramble: str) -> None:
         """スクランブルの描画"""
         pyxel.text(DC.MARGIN_X, DC.SCRAMBLE_Y, TC.SCRAMBLE, 
@@ -71,17 +82,17 @@ class SpeedcubeRenderer:
 
     def _draw_hold_status(self) -> None:
         """ホールド状態の描画"""
+        center_x = DC.WINDOW_WIDTH // 2
+        center_y = DC.TIMER_Y + DC.LARGE_FONT_HEIGHT // 2
+
         if self.app.space_hold_start > 0:
-            hold_time = (pyxel.frame_count - self.app.space_hold_start) / DC.FPS
-            hold_text = TC.HOLD_FORMAT.format(hold_time)
-            hold_x = (DC.WINDOW_WIDTH - len(hold_text) * DC.LARGE_FONT_WIDTH) // 2
-            pyxel.text(hold_x, DC.TIMER_Y, hold_text, 
+            self._draw_progress_circle()
+            
+        # ホールド指示テキストの表示
+        hold_x = (DC.WINDOW_WIDTH - len(TC.HOLD_INSTRUCTION) * DC.LARGE_FONT_WIDTH) // 2
+        if self.app.space_hold_start > 0 or pyxel.frame_count % DC.BLINK_CYCLE < DC.BLINK_ON_TIME:
+            pyxel.text(hold_x, DC.TIMER_Y, TC.HOLD_INSTRUCTION, 
                        self.app.text_color, self.large_font)
-        else:
-            hold_x = (DC.WINDOW_WIDTH - len(TC.HOLD_INSTRUCTION) * DC.LARGE_FONT_WIDTH) // 2
-            if pyxel.frame_count % DC.BLINK_CYCLE < DC.BLINK_ON_TIME:
-                pyxel.text(hold_x, DC.TIMER_Y, TC.HOLD_INSTRUCTION, 
-                           self.app.text_color, self.large_font)
 
     def _draw_hold_time(self) -> None:
         """ホールド時間の描画"""
@@ -134,3 +145,20 @@ class SpeedcubeRenderer:
         quit_x = DC.WINDOW_WIDTH - len(TC.QUIT) * DC.SMALL_FONT_WIDTH - DC.MARGIN_X
         quit_y = DC.WINDOW_HEIGHT - DC.SMALL_FONT_HEIGHT
         pyxel.text(quit_x, quit_y, TC.QUIT, self.app.text_color)
+
+    def _draw_progress_circle(self) -> None:
+        """ホールド進捗を示す円を描画"""
+        if self.app.space_hold_start <= 0:
+            return
+            
+        # 円の中心座標
+        center_x = DC.WINDOW_WIDTH // 2
+        center_y = DC.WINDOW_HEIGHT // 2
+        
+        # ホールド時間に基づいて円の半径を計算
+        hold_time = (pyxel.frame_count - self.app.space_hold_start) / DC.FPS
+        max_radius = min(DC.WINDOW_WIDTH, DC.WINDOW_HEIGHT) // 2
+        radius = min(int(hold_time * 100), max_radius)
+        
+        # 円を描画
+        pyxel.circ(center_x, center_y, radius, self.app.text_color)

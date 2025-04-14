@@ -33,6 +33,7 @@ class SpeedcubeApp:
         self.start_time = 0
         self.current_time = 0.0
         self.scramble = generate_wca_cube_scramble()
+        self.finish_time = 0  # 完了時刻を保存する変数を追加
         
         # レンダラーの初期化（自身を渡す）
         self.renderer = SpeedcubeRenderer(self)
@@ -57,6 +58,8 @@ class SpeedcubeApp:
                 self._update_countdown_state()
             case TimerState.RUNNING:
                 self._update_running_state()
+            case TimerState.FINISHED:
+                self._update_finished_state()
 
     def draw(self):
         """描画処理を実行"""
@@ -67,12 +70,15 @@ class SpeedcubeApp:
         if pyxel.btn(pyxel.KEY_SPACE):
             if self.space_hold_start == 0:
                 self.space_hold_start = pyxel.frame_count
+                pyxel.play(SC.BEEP_CHANNEL, SC.HOLD_SOUND)  # ホールド開始時にサウンド再生
             elif (pyxel.frame_count - self.space_hold_start) / DC.FPS >= GC.SPACE_HOLD_TIME:
                 self.state = TimerState.COUNTDOWN
                 self.countdown_start = pyxel.frame_count
                 pyxel.play(SC.BEEP_CHANNEL, SC.CHANGE_SOUND)
                 self.space_hold_start = 0
         else:
+            if self.space_hold_start > 0:
+                pyxel.stop(SC.BEEP_CHANNEL)  # ホールド解除時にサウンド停止
             self.space_hold_start = 0
 
     def _update_countdown_state(self):
@@ -81,9 +87,22 @@ class SpeedcubeApp:
         
         self._play_countdown_beeps(current_time)
         
-        if self._check_space_hold():
-            self._start_timer()
+        # インスペクション開始から一定時間はホールドチェックをスキップ
+        if current_time <= GC.INSPECTION_GRACE_PERIOD:
             return
+            
+        if pyxel.btn(pyxel.KEY_SPACE):
+            if self.space_hold_start == 0:
+                self.space_hold_start = pyxel.frame_count
+                pyxel.play(SC.BEEP_CHANNEL, SC.HOLD_SOUND)
+            elif (pyxel.frame_count - self.space_hold_start) / DC.FPS >= GC.SPACE_HOLD_TIME:
+                pyxel.stop(SC.BEEP_CHANNEL)
+                self._start_timer()
+                return
+        else:
+            if self.space_hold_start > 0:
+                pyxel.stop(SC.BEEP_CHANNEL)
+            self.space_hold_start = 0
 
         if current_time >= GC.INSPECTION_TIME:
             self._start_timer()
@@ -94,6 +113,12 @@ class SpeedcubeApp:
         
         if pyxel.btnp(pyxel.KEY_SPACE):
             self._finish_solve()
+
+    def _update_finished_state(self):
+        """FINISHED状態の更新処理"""
+        if (pyxel.frame_count - self.finish_time) / DC.FPS >= DC.RESULT_DISPLAY_TIME:
+            self.scramble = generate_wca_cube_scramble()  # 新しいスクランブルを生成
+            self.state = TimerState.READY  # READYステートに移行
 
     def _play_countdown_beeps(self, current_time: float):
         """カウントダウン音を再生"""
@@ -131,5 +156,5 @@ class SpeedcubeApp:
         self.timer.add_result(self.scramble, self.current_time)
         self.logger.save_result(self.current_time)
         pyxel.play(SC.BEEP_CHANNEL, SC.FINISH_SOUND)
-        self.scramble = generate_wca_cube_scramble()
-        self.state = TimerState.READY
+        self.finish_time = pyxel.frame_count  # 完了時刻を記録
+        self.state = TimerState.FINISHED  # FINISHEDステートに移行
