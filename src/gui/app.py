@@ -46,6 +46,7 @@ class SpeedcubeApp:
             pyxel.quit()
             
         if pyxel.btnp(pyxel.KEY_C):
+            pyxel.play(SC.BEEP_CHANNEL, SC.CHANGE_SOUND)
             self.bg_color = (self.bg_color + 1) % 16
             self.text_color = 7 if self.bg_color < 6 else 0
         
@@ -69,7 +70,7 @@ class SpeedcubeApp:
             elif (pyxel.frame_count - self.space_hold_start) / DC.FPS >= GC.SPACE_HOLD_TIME:
                 self.state = TimerState.COUNTDOWN
                 self.countdown_start = pyxel.frame_count
-                pyxel.play(SC.BEEP_CHANNEL, SC.COIN_SOUND)
+                pyxel.play(SC.BEEP_CHANNEL, SC.CHANGE_SOUND)
                 self.space_hold_start = 0
         else:
             self.space_hold_start = 0

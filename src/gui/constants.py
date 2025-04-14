@@ -41,16 +41,18 @@ class DisplayConfig:
     TEXT_COLOR = 7
     WARNING_COLOR = 8  # 赤色（4秒以下警告用）
     
-    # 点滅表示
-    BLINK_CYCLE = 60
-    BLINK_ON_TIME = 40  # 1サイクル中の表示時間
     
     # 画面幅の計算
     # フォント幅 * スクランブル最大59文字 + フォントスペース * 19 + 左右マージン20×2
     WINDOW_WIDTH = MIDDLE_FONT_WIDTH * 59 +  FONT_SPACING_X * 58 + MARGIN_X * 2
     WINDOW_HEIGHT = 240
     
-    FPS = 60  # FPSをクラス定数として定義
+    # フレームレート
+    FPS = 30  
+
+    # 点滅表示
+    BLINK_CYCLE = FPS
+    BLINK_ON_TIME = (FPS/3)*2  # 1サイクル中の表示時間
 
 class GameConfig:
     # WCAルールに関する定数
@@ -83,4 +85,4 @@ class SoundConfig:
     COUNTDOWN_SOUND = 0
     START_SOUND = 1
     FINISH_SOUND = 2
-    COIN_SOUND = 3
+    CHANGE_SOUND = 3
