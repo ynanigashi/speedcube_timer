@@ -83,6 +83,7 @@ class TextConstants:
 class SoundConfig:
     """サウンド関連の定数"""
     BEEP_CHANNEL = 0
+    SOUND_CHANNEL = 1
     
     # サウンドインデックス
     COUNTDOWN_SOUND = 0

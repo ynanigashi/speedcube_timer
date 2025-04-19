@@ -1,6 +1,5 @@
 """スピードキューブタイマーのメインアプリケーション"""
 import pyxel
-from ..timer import SpeedcubeTimer
 from ..speedcube_stats import SpeedcubeStats
 from ..scramble import generate_wca_cube_scramble
 from ..log_handler import SpeedcubeLogger
@@ -13,15 +12,15 @@ class SpeedcubeApp:
     def __init__(self):
         # ウィンドウサイズとタイトルの設定
         pyxel.init(DC.WINDOW_WIDTH, DC.WINDOW_HEIGHT, 
-                  title="Speedcube Timer", fps=DC.FPS)
+                  title="Speedcube Timer", fps=DC.FPS,
+                  quit_key=pyxel.KEY_END)
         
         # load assets
         pyxel.load('speedcube_timer.pyxres')
         
         # コンポーネントの初期化
-        self.timer = SpeedcubeTimer()
-        self.stats = SpeedcubeStats()
         self.logger = SpeedcubeLogger()
+        self.stats = SpeedcubeStats(self.logger)  # ロガーを渡す
         
         # 状態の初期化
         self.bg_color = DC.DEFAULT_BACKGROUND_COLOR
@@ -33,8 +32,8 @@ class SpeedcubeApp:
         self.start_time = 0
         self.current_time = 0.0
         self.scramble = generate_wca_cube_scramble()
-        self.finish_time = 0  # 完了時刻を保存する変数を追加
-        
+        self.finish_frame_count = 0  # 完了時刻を保存する変数を追加
+
         # レンダラーの初期化（自身を渡す）
         self.renderer = SpeedcubeRenderer(self)
 
@@ -43,7 +42,10 @@ class SpeedcubeApp:
 
     def update(self):
         """状態に応じた更新処理を実行"""
+        # ESCキーで終了        
         if pyxel.btnp(pyxel.KEY_ESCAPE):
+            result = self.logger.sync_data()
+            print(result[1])
             pyxel.quit()
             
         if pyxel.btnp(pyxel.KEY_C):
@@ -58,9 +60,7 @@ class SpeedcubeApp:
                 self._update_countdown_state()
             case TimerState.RUNNING:
                 self._update_running_state()
-            case TimerState.FINISHED:
-                self._update_finished_state()
-
+            
     def draw(self):
         """描画処理を実行"""
         self.renderer.draw(self.state)
@@ -114,12 +114,6 @@ class SpeedcubeApp:
         if pyxel.btnp(pyxel.KEY_SPACE):
             self._finish_solve()
 
-    def _update_finished_state(self):
-        """FINISHED状態の更新処理"""
-        if (pyxel.frame_count - self.finish_time) / DC.FPS >= DC.RESULT_DISPLAY_TIME:
-            self.scramble = generate_wca_cube_scramble()  # 新しいスクランブルを生成
-            self.state = TimerState.READY  # READYステートに移行
-
     def _play_countdown_beeps(self, current_time: float):
         """カウントダウン音を再生"""
         for beep_time in GC.COUNTDOWN_BEEP_TIMES:
@@ -153,8 +147,10 @@ class SpeedcubeApp:
 
     def _finish_solve(self):
         """ソルブ完了時の処理"""
-        self.timer.add_result(self.scramble, self.current_time)
-        self.logger.save_result(self.current_time)
-        pyxel.play(SC.BEEP_CHANNEL, SC.FINISH_SOUND)
-        self.finish_time = pyxel.frame_count  # 完了時刻を記録
-        self.state = TimerState.FINISHED  # FINISHEDステートに移行
+        #BEEP_CHANNELはReadystateで使用されているので、SOUND_CHANNELを使用
+        pyxel.play(SC.SOUND_CHANNEL, SC.FINISH_SOUND)
+        self.finish_frame_count = pyxel.frame_count
+        self.logger.save_result(self.current_time, self.scramble)
+        self.stats.update_stats()
+        self.scramble = generate_wca_cube_scramble()
+        self.state = TimerState.READY
