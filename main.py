@@ -1,4 +1,4 @@
-from src.gui.app import SpeedcubeApp
+from src.app import SpeedcubeApp
 
 def main():
     app = SpeedcubeApp()

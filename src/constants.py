@@ -17,7 +17,7 @@ class DisplayConfig:
     LARGE_FONT_HEIGHT = 12
     
     # フォントパス
-    FONT_PATH = "../../.venv/Lib/site-packages/pyxel/examples/assets"
+    FONT_PATH = "../.venv/Lib/site-packages/pyxel/examples/assets"
     MIDDLE_FONT_FILE = f"{FONT_PATH}/umplus_j10r.bdf"
     LARGE_FONT_FILE = f"{FONT_PATH}/umplus_j12r.bdf"
 

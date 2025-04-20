@@ -1,8 +1,8 @@
 """スピードキューブタイマーのメインアプリケーション"""
 import pyxel
-from ..speedcube_stats import SpeedcubeStats
-from ..scramble import generate_wca_cube_scramble
-from ..log_handler import SpeedcubeLogger
+from .stats import SpeedcubeStats
+from .scramble import generate_wca_cube_scramble
+from .log_handler import SpeedcubeLogger
 from .constants import DisplayConfig as DC, GameConfig as GC
 from .constants import SoundConfig as SC
 from .renderer import SpeedcubeRenderer
@@ -16,7 +16,7 @@ class SpeedcubeApp:
                   quit_key=pyxel.KEY_END)
         
         # load assets
-        pyxel.load('speedcube_timer.pyxres')
+        pyxel.load('../data/speedcube_timer.pyxres')
         
         # コンポーネントの初期化
         self.logger = SpeedcubeLogger()

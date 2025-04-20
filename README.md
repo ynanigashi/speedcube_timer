@@ -70,21 +70,18 @@ python main.py
 ```
 speedcube_timer/
 ├── src/
-│   ├── gui/
-│   │   ├── __init__.py
-│   │   ├── app.py          # メインアプリケーション
-│   │   ├── constants.py    # 設定定数
-│   │   ├── renderer.py     # 描画処理
-│   │   └── states.py       # 状態管理
-│   ├── __init__.py
-│   ├── timer.py            # タイマー機能
-│   ├── speedcube_stats.py  # 統計計算
-│   ├── scramble.py         # スクランブル生成
-│   └── log_handler.py      # データ保存・同期処理
-├── data/                   # ローカルデータベース保存ディレクトリ
-├── main.py                 # エントリーポイント
-├── requirements.txt        # 依存パッケージ
-├── config.ini.example      # 設定ファイルテンプレート
+│   ├── app.py                 # メインアプリケーション
+│   ├── constants.py           # 設定定数
+│   ├── renderer.py            # 描画処理
+│   ├── states.py              # 状態管理
+│   ├── stats.py               # 統計計算
+│   ├── scramble.py            # スクランブル生成
+│   └── log_handler.py         # データ保存・同期処理
+├── data/                      
+│   └── speedcube_timer.pyxres # pyxelデータ
+├── main.py                    # エントリーポイント
+├── requirements.txt           # 依存パッケージ
+├── config.ini.example         # 設定ファイルテンプレート
 └── README.md
 ```
 
@@ -103,6 +100,7 @@ speedcube_timer/
  - 都度描画がいいのか、BMP読み込みがいいのは検証して確認
  - 描画であれば、三角形長方形三角形で一つのパーツが出来る見込み
 - サウンドの改善
+- ローカルDBからのレコード削除
 - 画面読み込みの実装
 - 色などの設定を読み込むコンフィグファイルの実装と自動設定保存機能の実装
 - Stats画面の実装
