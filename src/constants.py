@@ -60,7 +60,7 @@ class DisplayConfig:
 class GameConfig:
     # WCAルールに関する定数
     INSPECTION_TIME = 15.0
-    SPACE_HOLD_TIME = 0.8
+    BUTTON_HOLD_TIME = 0.8
     COUNTDOWN_BEEP_TIMES = [3, 2, 1, 0]
     INSPECTION_GRACE_PERIOD = 2.0  # インスペクション開始後のホールドチェックスキップ時間（秒）
 

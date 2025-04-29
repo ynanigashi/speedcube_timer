@@ -92,11 +92,14 @@ class SpeedcubeLogger:
         now = datetime.datetime.now()
         datetime_str = now.strftime("%Y/%m/%d %H:%M:%S")
         
+        # time_resultを小数点以下2桁に丸める
+        rounded_time = round(time_result, 2)
+        
         # SQLiteデータベースにデータを追加（scrambleとsessionも保存）
         try:
             self.cursor.execute(
                 "INSERT INTO results (datetime, time_result, scramble, session) VALUES (?, ?, ?, ?)",
-                (datetime_str, time_result, scramble, self.session_id)
+                (datetime_str, rounded_time, scramble, self.session_id)
             )
             self.conn.commit()
         except sqlite3.Error as e:
@@ -177,10 +180,10 @@ class SpeedcubeLogger:
                 if len(row) >= 2:  # 少なくとも日時と記録がある行のみ処理
                     datetime_str = row[0]
                     try:
-                        # 記録の文字列をfloat型に変換
-                        time_result = float(row[1].replace(',', '.'))
+                        # 記録の文字列をfloat型に変換し、小数点以下2桁に丸める
+                        time_result = round(float(row[1].replace(',', '.')), 2)
                         
-                        # スプレッドシートの記録をセットに追加（後のエクスポート処理用）
+                        # スプレッドシートの記録をセットに追加
                         sheet_records.add((datetime_str, time_result))
                         
                         # 重複チェック
@@ -209,9 +212,10 @@ class SpeedcubeLogger:
             # エクスポートするレコードを特定
             to_export = []
             for datetime_str, time_result in db_records:
-                # スプレッドシートに存在しないデータのみエクスポート
-                if (datetime_str, time_result) not in sheet_records:
-                    to_export.append((datetime_str, time_result))
+                # SQLiteのtime_resultは既に丸められているはずですが、念のため確認
+                rounded_time = round(float(time_result), 2)
+                if (datetime_str, rounded_time) not in sheet_records:
+                    to_export.append((datetime_str, rounded_time))
             
             # Google Spreadsheetにデータを追加
             exported_count = 0
@@ -224,6 +228,7 @@ class SpeedcubeLogger:
                 rows_to_add = []
                 
                 for datetime_str, time_result in batch:
+                    # time_resultは既に丸められているので、そのまま文字列フォーマット
                     rows_to_add.append([datetime_str, f"{time_result:.2f}"])
                 
                 if rows_to_add:
@@ -238,7 +243,7 @@ class SpeedcubeLogger:
             self.conn.commit()
             
             # 成功メッセージを返す
-            message = f"同期が完了しました。インポート: {imported_count}件, エクスポート: {exported_count}件"
+            message = f"downloaded: {imported_count}, Uploaded: {exported_count}"
             return (True, message)
         
         except SpeedcubeLoggerError as e:

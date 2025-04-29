@@ -13,7 +13,7 @@ class SpeedcubeRenderer:
         self.app = app
         
     def draw(self, state):
-        """状態に応じた描画処理を実行"""
+        """状態に応じた描画処理"""
         # 背景を描画
         pyxel.cls(self.app.bg_color)
         
@@ -25,6 +25,8 @@ class SpeedcubeRenderer:
                 self._draw_countdown_state()
             case TimerState.RUNNING:
                 self._draw_running_state()
+            case TimerState.SYNCING:
+                self._draw_syncing_state()
         
         # 共通UI要素の描画
         self._draw_common_elements()
@@ -63,6 +65,24 @@ class SpeedcubeRenderer:
         time_x = (DC.WINDOW_WIDTH - len(f"{self.app.current_time:.2f}") * DC.LARGE_FONT_WIDTH) // 2
         pyxel.text(time_x, DC.TIMER_Y, f"{self.app.current_time:.2f}", 
                    self.app.text_color, self.large_font)
+
+    def _draw_syncing_state(self):
+        """同期中の描画処理"""
+        # 同期状態のメッセージ
+        if self.app.sync_result is None:
+            status_text = "Data is syncing..."
+            success = None
+        else:
+            success, message = self.app.sync_result
+            status_text = message
+            
+        # ステータスメッセージの描画
+        pyxel.text(
+            DC.WINDOW_WIDTH // 2 - len(status_text) * 2,
+            DC.WINDOW_HEIGHT // 2,
+            status_text,
+            self.app.text_color if success is None or success else self.app.warning_color
+        )
 
     def _draw_common_elements(self):
         """共通UI要素の描画処理"""

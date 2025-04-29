@@ -29,7 +29,6 @@ class SpeedcubeStats:
             
         # セッションデータの取得（現在のセッションデータのみ）
         raw_results = self.logger.get_session_results()
-        print(raw_results)
 
         if not raw_results:
             self.session_results = []
