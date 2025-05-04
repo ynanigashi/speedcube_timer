@@ -88,9 +88,9 @@ class SpeedcubeLogger:
         Raises:
             SpeedcubeLoggerError: データの保存に失敗した場合
         """
-        # 現在の日時を取得し、フォーマットする
+        # 現在の日時を取得し、フォーマットする（ゼロ埋めされた形式で）
         now = datetime.datetime.now()
-        datetime_str = now.strftime("%Y/%m/%d %H:%M:%S")
+        datetime_str = now.strftime("%Y/%m/%d %H:%M:%S")  # 24時間形式でゼロ埋め
         
         # time_resultを小数点以下2桁に丸める
         rounded_time = round(time_result, 2)
@@ -157,6 +157,43 @@ class SpeedcubeLogger:
         except sqlite3.Error as e:
             raise SpeedcubeLoggerError(f"セッションの結果取得に失敗しました: {str(e)}")
 
+    def _convert_to_comparable_records(self, data_list: list) -> set:
+        """
+        データソースを比較可能なセットに変換する
+        
+        Args:
+            data_list (list): 変換するデータのリスト
+            
+        Returns:
+            set: (datetime_str, time_result) のタプルのセット
+        """
+        result_set = set()
+        
+        for item in data_list:
+            try:
+                # データが最低2つの要素を持つことを確認
+                if len(item) >= 2:
+                    # 日時文字列を標準化
+                    datetime_str = self._standardize_datetime_format(item[0])
+                    
+                    # 数値を浮動小数点に変換（文字列の場合はカンマをピリオドに置換）
+                    # スプシはカンマ区切りの数値を返すため、置換処理を行う
+                    if isinstance(item[1], str):
+                        time_value = item[1].replace(',', '.')
+                    else:
+                        time_value = item[1]
+                    
+                    # 浮動小数点に変換して丸める
+                    time_result = round(float(time_value), 2)
+                    
+                    # 結果をセットに追加
+                    result_set.add((datetime_str, time_result))
+            except (ValueError, TypeError, IndexError):
+                # 変換できない項目はスキップ
+                continue
+                
+        return result_set
+
     def sync_data(self) -> tuple:
         """
         SQLiteデータベースとGoogle Spreadsheetの間でデータを双方向に同期する
@@ -165,92 +202,111 @@ class SpeedcubeLogger:
             tuple: 成功した場合は (True, メッセージ)、失敗した場合は (False, エラーメッセージ)
         """
         try:
-            # --- Google Spreadsheetからのインポート処理 ---
-            # シートからすべてのデータを取得
+            # スプレッドシートとデータベースのデータを比較可能なセットに変換
+            
+            # --- Google Spreadsheetからデータを取得 ---
             all_records = self.sheet.get_all_values()
-            
-            # ヘッダー行が存在する場合はスキップ
+            # ヘッダー行はスキップ
             sheet_rows = all_records[1:] if len(all_records) > 0 else []
+            sheet_records = self._convert_to_comparable_records(sheet_rows)
             
-            # インポート用のデータを処理
+            # --- SQLiteからデータを取得 ---
+            all_db_results = self.get_results()
+            db_records = self._convert_to_comparable_records(all_db_results)
+            
+            # --- インポート処理 (Spreadsheet -> SQLite) ---
+            to_import = sheet_records - db_records
             imported_count = 0
-            sheet_records = set()  # エクスポート時に重複確認用
             
-            for row in sheet_rows:
-                if len(row) >= 2:  # 少なくとも日時と記録がある行のみ処理
-                    datetime_str = row[0]
-                    try:
-                        # 記録の文字列をfloat型に変換し、小数点以下2桁に丸める
-                        time_result = round(float(row[1].replace(',', '.')), 2)
-                        
-                        # スプレッドシートの記録をセットに追加
-                        sheet_records.add((datetime_str, time_result))
-                        
-                        # 重複チェック
-                        self.cursor.execute(
-                            "SELECT COUNT(*) FROM results WHERE datetime = ? AND time_result = ?", 
-                            (datetime_str, time_result)
-                        )
-                        exists = self.cursor.fetchone()[0] > 0
-                        
-                        if not exists:
-                            # SQLiteに保存 (セッションIDはNullに設定)
-                            self.cursor.execute(
-                                "INSERT INTO results (datetime, time_result, scramble, session) VALUES (?, ?, ?, ?)",
-                                (datetime_str, time_result, None, None)
-                            )
-                            imported_count += 1
-                    except ValueError:
-                        # 数値として解析できない場合はスキップ
-                        continue
+            if to_import:
+                # 一括インサート用のリスト
+                import_data = [(datetime_str, time_result, None, None) 
+                              for datetime_str, time_result in to_import]
+                
+                # 一括でインポート
+                self.cursor.executemany(
+                    "INSERT INTO results (datetime, time_result, scramble, session) VALUES (?, ?, ?, ?)",
+                    import_data
+                )
+                imported_count = len(import_data)
+                
+                # インポート処理が完了したらコミット
+                self.conn.commit()
             
-            # --- SQLiteからのエクスポート処理 ---
-            # SQLiteからすべてのデータを取得
-            self.cursor.execute("SELECT datetime, time_result FROM results ORDER BY datetime")
-            db_records = self.cursor.fetchall()
-            
-            # エクスポートするレコードを特定
-            to_export = []
-            for datetime_str, time_result in db_records:
-                # SQLiteのtime_resultは既に丸められているはずですが、念のため確認
-                rounded_time = round(float(time_result), 2)
-                if (datetime_str, rounded_time) not in sheet_records:
-                    to_export.append((datetime_str, rounded_time))
-            
-            # Google Spreadsheetにデータを追加
+            # --- エクスポート処理 (SQLite -> Spreadsheet) ---
+            to_export = db_records - sheet_records
             exported_count = 0
             
-            # バッチ処理のサイズ（API呼び出し回数を減らすため）
+            # エクスポート用のリストを作成
+            export_rows = [[datetime_str, f"{time_result:.2f}"] 
+                          for datetime_str, time_result in to_export]
+            
+            # バッチ処理のサイズ
             batch_size = 100
             
-            for i in range(0, len(to_export), batch_size):
-                batch = to_export[i:i+batch_size]
-                rows_to_add = []
-                
-                for datetime_str, time_result in batch:
-                    # time_resultは既に丸められているので、そのまま文字列フォーマット
-                    rows_to_add.append([datetime_str, f"{time_result:.2f}"])
-                
-                if rows_to_add:
-                    # バッチでスプレッドシートに追加
+            for i in range(0, len(export_rows), batch_size):
+                batch = export_rows[i:i+batch_size]
+                if batch:
                     self.sheet.append_rows(
-                        rows_to_add,
+                        batch,
                         value_input_option='USER_ENTERED'
                     )
-                    exported_count += len(rows_to_add)
-            
-            # 変更をコミット
-            self.conn.commit()
+                    exported_count += len(batch)
+
             
             # 成功メッセージを返す
             message = f"downloaded: {imported_count}, Uploaded: {exported_count}"
             return (True, message)
-        
+            
         except SpeedcubeLoggerError as e:
             return (False, f"同期中にエラーが発生しました: {e.message}")
         except Exception as e:
             print(f"同期処理でエラーが発生しました: {str(e)}")  # ログ出力
             return (False, f"予期しないエラーが発生しました: {str(e)}")
+    
+    
+    def _standardize_datetime_format(self, datetime_str: str) -> str:
+        """
+        日時の文字列を標準フォーマット（YYYY/MM/DD HH:MM:SS）に変換する
+        時・分・秒が1桁の場合は0埋めして2桁にする
+        
+        Args:
+            datetime_str (str): 変換する日時の文字列
+            
+        Returns:
+            str: 標準化された日時の文字列
+        """
+        try:
+            # 日付と時間の部分に分割
+            date_part, time_part = datetime_str.split(' ', 1)
+            
+            # 時間部分を時、分、秒に分割
+            time_components = time_part.split(':')
+            
+            # 時間の各要素を2桁にゼロ埋め
+            padded_time = []
+            for component in time_components:
+                # コンポーネントが数値であることを確認
+                if component.strip().isdigit():
+                    # 数値に変換してゼロ埋め
+                    padded_time.append(f"{int(component):02d}")
+                else:
+                    # 数値でない場合はそのまま
+                    padded_time.append(component)
+            
+            # 標準化された日時文字列を構築
+            standardized_datetime = f"{date_part} {':'.join(padded_time)}"
+            
+            # 秒がない場合（HH:MM形式）は秒を追加
+            if len(padded_time) == 2:
+                standardized_datetime += ":00"
+                
+            return standardized_datetime
+            
+        except Exception:
+            # パースに失敗した場合は元の文字列を返す
+            return datetime_str
+
 
     def __del__(self):
         """デストラクタ：データベース接続を閉じる"""
