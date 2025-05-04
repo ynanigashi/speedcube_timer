@@ -67,7 +67,7 @@ class SpeedcubeApp:
             
     def draw(self):
         """描画処理を実行"""
-        self.renderer.draw(self.state)
+        self.renderer.draw()
 
     def _update_ready_state(self):
         """READY状態の更新処理"""
@@ -132,7 +132,7 @@ class SpeedcubeApp:
         if pyxel.btn(pyxel.KEY_SPACE):
             if self.space_hold_start == 0:
                 self.space_hold_start = pyxel.frame_count
-            elif (pyxel.frame_count - self.space_hold_start) / DC.FPS >= GC.SPACE_HOLD_TIME:
+            elif (pyxel.frame_count - self.space_hold_start) / DC.FPS >= GC.BUTTON_HOLD_TIME:
                 return True
         else:
             self.space_hold_start = 0

@@ -28,7 +28,7 @@ class DisplayConfig:
     MARGIN_Y = 10
         
     INSPECTION_TIME = 15.0  # WCAルールの15秒
-    SPACE_HOLD_TIME = 0.3  # スペースキー長押しの必要時間
+    SPACE_HOLD_TIME = 1.0  # スペースキー長押しの必要時間
     COUNTDOWN_BEEP_TIMES = [3, 2, 1, 0]  # ピッ音を鳴らすタイミング（残り秒数）
     
     # 縦方向の位置（上マージンを考慮して調整）
@@ -60,7 +60,7 @@ class DisplayConfig:
 class GameConfig:
     # WCAルールに関する定数
     INSPECTION_TIME = 15.0
-    BUTTON_HOLD_TIME = 0.8
+    BUTTON_HOLD_TIME = 1.0
     COUNTDOWN_BEEP_TIMES = [3, 2, 1, 0]
     INSPECTION_GRACE_PERIOD = 2.0  # インスペクション開始後のホールドチェックスキップ時間（秒）
 

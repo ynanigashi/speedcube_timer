@@ -12,13 +12,13 @@ class SpeedcubeRenderer:
         # アプリケーションの参照を保持
         self.app = app
         
-    def draw(self, state):
+    def draw(self):
         """状態に応じた描画処理"""
         # 背景を描画
         pyxel.cls(self.app.bg_color)
         
         # 状態に応じた描画処理
-        match state:
+        match self.app.state:
             case TimerState.READY:
                 self._draw_ready_state()
             case TimerState.COUNTDOWN:
@@ -34,6 +34,7 @@ class SpeedcubeRenderer:
     def _draw_ready_state(self):
         """READY状態の描画"""
         self._draw_scramble(self.app.scramble)
+        self._draw_hold_text()
         self._draw_hold_status()
         self._draw_results(self.app.stats)
 
@@ -50,9 +51,7 @@ class SpeedcubeRenderer:
         pyxel.text(time_x, DC.TIMER_Y, f"{countdown_time:.1f}", color, self.large_font)
         
         # ホールド状態の描画
-        if self.app.space_hold_start > 0:
-            self._draw_progress_circle()
-            self._draw_hold_time()
+        self._draw_hold_status()
 
     def _draw_running_state(self):
         """RUNNING状態の描画"""
@@ -97,12 +96,15 @@ class SpeedcubeRenderer:
 
     def _draw_hold_status(self):
         """ホールド状態の描画"""
-        center_x = DC.WINDOW_WIDTH // 2
-        center_y = DC.TIMER_Y + DC.LARGE_FONT_HEIGHT // 2
-
+        # スペースキーがホールドされている場合の処理
         if self.app.space_hold_start > 0:
             self._draw_progress_circle()
+
+        if self.app.s_key_hold_start > 0:
+            self._draw_s_key_arrow()
             
+
+    def _draw_hold_text(self):
         # ホールド指示テキストの表示
         hold_x = (DC.WINDOW_WIDTH - len(TC.HOLD_INSTRUCTION) * DC.LARGE_FONT_WIDTH) // 2
         if self.app.space_hold_start > 0 or pyxel.frame_count % DC.BLINK_CYCLE < DC.BLINK_ON_TIME:
@@ -179,3 +181,44 @@ class SpeedcubeRenderer:
         
         # 円を描画
         pyxel.circ(center_x, center_y, radius, self.app.text_color)
+
+    def _draw_s_key_arrow(self):
+        """Sキーがホールドされている時に上昇矢印を描画"""
+        if not hasattr(self.app, 's_key_hold_start') or self.app.s_key_hold_start <= 0:
+            return
+        
+        # ホールド時間を計算
+        hold_time = (pyxel.frame_count - self.app.s_key_hold_start) / DC.FPS
+        
+        # 矢印の基本パラメータ
+        arrow_width = DC.WINDOW_WIDTH // 2  # 矢印の幅
+        arrow_height = DC.WINDOW_HEIGHT // 1.2  # 矢印の高さ
+        
+        # ホールド時間に基づいて矢印の位置を計算
+        travel_distance = DC.WINDOW_HEIGHT * hold_time
+        
+        # 矢印の現在のY座標を計算
+        current_y = DC.WINDOW_HEIGHT - travel_distance
+        
+        # 矢印の中心X座標
+        center_x = DC.WINDOW_WIDTH // 2
+        
+        # 矢印の描画
+        # 矢印の本体（三角形）
+        pyxel.tri(
+            center_x, current_y,  # 頂点
+            center_x - arrow_width // 2, current_y + arrow_height // 2,  # 左下
+            center_x + arrow_width // 2, current_y + arrow_height // 2,  # 右下
+            self.app.text_color
+        )
+        
+        # 矢印の柄部分（長方形）
+        rect_width = arrow_width // 4
+        rect_height = arrow_height // 2
+        pyxel.rect(
+            center_x - rect_width // 2,
+            current_y + arrow_height // 2,
+            rect_width,
+            rect_height,
+            self.app.text_color
+        )
