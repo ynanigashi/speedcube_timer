@@ -91,3 +91,4 @@ class SoundConfig:
     FINISH_SOUND = 2
     CHANGE_SOUND = 3
     HOLD_SOUND = 4
+    SYNC_SOUND = 5

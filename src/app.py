@@ -98,7 +98,7 @@ class SpeedcubeApp:
         current_time = (pyxel.frame_count - self.countdown_start) / DC.FPS
         
         self._play_countdown_beeps(current_time)
-        
+
         # インスペクション開始から一定時間はホールドチェックを
         # スキップ
         if current_time <= GC.INSPECTION_GRACE_PERIOD:
@@ -224,3 +224,7 @@ class SpeedcubeApp:
     def _set_countdown_start(self):
         """カウントダウン開始時間をセット"""
         self.countdown_start = pyxel.frame_count
+
+    def run(self):
+        """アプリケーションを実行"""
+        pass  # pyxel.runは__init__で既に呼ばれている

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 class SpeedcubeStats:
     def __init__(self, logger=None):
         """
@@ -119,3 +121,103 @@ class SpeedcubeStats:
             "session_avg": self.session_avg,
             "solve_count": len(self.session_results)
         }
+    
+    def _get_monthly_results(self, year=None, month=None):
+        """
+        指定した月の結果データを取得する（内部用メソッド）
+        
+        Args:
+            year: 年（デフォルトは現在の年）
+            month: 月（デフォルトは現在の月）
+            
+        Returns:
+            list: 指定した月の結果リスト、エラーの場合は空リスト
+        """
+        if not self.logger:
+            return []
+        
+        # デフォルトは現在の年月
+        if year is None or month is None:
+            now = datetime.now()
+            year = year or now.year
+            month = month or now.month
+        
+        # ロガーから全ての結果を取得
+        try:
+            all_results = self.logger.get_results()
+            if not all_results:
+                return []
+            
+            monthly_results = []
+            for result in all_results:
+                date_time_str, time_result, scramble, session_id = result
+                
+                # 日時文字列をdatetimeオブジェクトに変換
+                try:
+                    date_time = datetime.fromisoformat(date_time_str)
+                    # 指定した年月と一致するかチェック
+                    if date_time.year == year and date_time.month == month:
+                        monthly_results.append(result)
+                except ValueError:
+                    # 日時の形式が正しくない場合はスキップ
+                    continue
+            
+            return monthly_results
+            
+        except Exception:
+            # エラーが発生した場合は空リストを返す
+            return []
+
+    def get_monthly_solve_count(self, year=None, month=None):
+        """
+        指定した月のソルブ回数を取得する
+        
+        Args:
+            year: 年（デフォルトは現在の年）
+            month: 月（デフォルトは現在の月）
+            
+        Returns:
+            int: 指定した月のソルブ回数
+        """
+        monthly_results = self._get_monthly_results(year, month)
+        return len(monthly_results)
+    
+    def get_current_month_solve_count(self):
+        """
+        現在の月のソルブ回数を取得する
+        
+        Returns:
+            int: 現在の月のソルブ回数
+        """
+        return self.get_monthly_solve_count()
+    
+    def get_monthly_average_time(self, year=None, month=None):
+        """
+        指定した月の平均ソルブ時間を取得する
+        
+        Args:
+            year: 年（デフォルトは現在の年）
+            month: 月（デフォルトは現在の月）
+            
+        Returns:
+            float: 指定した月の平均ソルブ時間、データがない場合はNone
+        """
+        monthly_results = self._get_monthly_results(year, month)
+        
+        if not monthly_results:
+            return None
+        
+        # タイムのみを抽出
+        monthly_times = [result[1] for result in monthly_results]
+        
+        # 平均を計算
+        return sum(monthly_times) / len(monthly_times)
+    
+    def get_current_month_average_time(self):
+        """
+        現在の月の平均ソルブ時間を取得する
+        
+        Returns:
+            float: 現在の月の平均ソルブ時間、データがない場合はNone
+        """
+        return self.get_monthly_average_time()
