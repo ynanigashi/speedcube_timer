@@ -43,10 +43,9 @@ class SpeedcubeRenderer:
         # インスペクションヘッダー
         inspection_x = (DC.WINDOW_WIDTH - len(TC.INSPECTION) * DC.LARGE_FONT_WIDTH) // 2
         pyxel.text(inspection_x, DC.SCRAMBLE_Y, TC.INSPECTION, self.app.text_color, self.large_font)
-        
-        # カウントダウン表示
+          # カウントダウン表示
         countdown_time = GC.INSPECTION_TIME - (pyxel.frame_count - self.app.countdown_start) / DC.FPS
-        color = DC.WARNING_COLOR if countdown_time <= 4 else self.app.text_color
+        color = DC.DEFAULT_WARNING_COLOR if countdown_time <= 4 else self.app.text_color
         time_x = (DC.WINDOW_WIDTH - len(f"{countdown_time:.1f}") * DC.LARGE_FONT_WIDTH) // 2
         pyxel.text(time_x, DC.TIMER_Y, f"{countdown_time:.1f}", color, self.large_font)
         

@@ -20,48 +20,36 @@ class DisplayConfig:
     FONT_PATH = "../.venv/Lib/site-packages/pyxel/examples/assets"
     MIDDLE_FONT_FILE = f"{FONT_PATH}/umplus_j10r.bdf"
     LARGE_FONT_FILE = f"{FONT_PATH}/umplus_j12r.bdf"
-
+    
     # レイアウト
     FONT_SPACING_X = 1
     FONT_SPACING_Y = 5
     MARGIN_X = 20
     MARGIN_Y = 10
-        
-    INSPECTION_TIME = 15.0  # WCAルールの15秒
-    SPACE_HOLD_TIME = 1.0  # スペースキー長押しの必要時間
-    COUNTDOWN_BEEP_TIMES = [3, 2, 1, 0]  # ピッ音を鳴らすタイミング（残り秒数）
+
+    # ウィンドウサイズ（フォント幅 * スクランブル最大59文字 + フォントスペース * 58 + 左右マージン20×2）
+    WINDOW_WIDTH = MIDDLE_FONT_WIDTH * 59 + FONT_SPACING_X * 58 + MARGIN_X * 2
+    WINDOW_HEIGHT = 240
     
     # 縦方向の位置（上マージンを考慮して調整）
     SCRAMBLE_Y = MARGIN_Y
     SCRAMBLE_TEXT_Y = SCRAMBLE_Y + MIDDLE_FONT_HEIGHT + FONT_SPACING_Y
     TIMER_Y = SCRAMBLE_TEXT_Y + MIDDLE_FONT_HEIGHT + MARGIN_Y * 3
     RESULTS_Y = TIMER_Y + LARGE_FONT_HEIGHT + MARGIN_Y * 3
-
-    # テキストカラー
-    TEXT_COLOR = 7
-    WARNING_COLOR = 8  # 赤色（4秒以下警告用）
-    
-    
-    # 画面幅の計算
-    # フォント幅 * スクランブル最大59文字 + フォントスペース * 19 + 左右マージン20×2
-    WINDOW_WIDTH = MIDDLE_FONT_WIDTH * 59 +  FONT_SPACING_X * 58 + MARGIN_X * 2
-    WINDOW_HEIGHT = 240
     
     # フレームレート
-    FPS = 30  
-
+    FPS = 30
+    
     # 点滅表示
     BLINK_CYCLE = FPS
-    BLINK_ON_TIME = (FPS/3)*2  # 1サイクル中の表示時間
-
-    #結果表示時間
-    RESULT_DISPLAY_TIME = 2.0  # 秒数
+    BLINK_ON_TIME = (FPS // 3) * 2  # 1サイクル中の表示時間
 
 class GameConfig:
+    """ゲームロジックに関する定数"""
     # WCAルールに関する定数
-    INSPECTION_TIME = 15.0
-    BUTTON_HOLD_TIME = 1.0
-    COUNTDOWN_BEEP_TIMES = [3, 2, 1, 0]
+    INSPECTION_TIME = 15.0  # WCAルールの15秒
+    BUTTON_HOLD_TIME = 1.0  # スペースキー長押しの必要時間
+    COUNTDOWN_BEEP_TIMES = [3, 2, 1, 0]  # ビープ音を鳴らすタイミング（残り秒数）
     INSPECTION_GRACE_PERIOD = 2.0  # インスペクション開始後のホールドチェックスキップ時間（秒）
 
 class TextConstants:
