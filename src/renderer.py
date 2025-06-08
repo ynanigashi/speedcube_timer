@@ -16,8 +16,7 @@ class SpeedcubeRenderer:
         """状態に応じた描画処理"""
         # 背景を描画
         pyxel.cls(self.app.bg_color)
-        
-        # 状態に応じた描画処理
+          # 状態に応じた描画処理
         match self.app.state:
             case TimerState.READY:
                 self._draw_ready_state()
@@ -27,8 +26,9 @@ class SpeedcubeRenderer:
                 self._draw_running_state()
             case TimerState.SYNCING:
                 self._draw_syncing_state()
-        
-        # 共通UI要素の描画
+            case TimerState.STATS:
+                self._draw_stats_state()
+          # 共通UI要素の描画
         self._draw_common_elements()
     
     def _draw_ready_state(self):
@@ -37,6 +37,7 @@ class SpeedcubeRenderer:
         self._draw_hold_text()
         self._draw_hold_status()
         self._draw_results(self.app.stats)
+        self._draw_ready_instructions()
 
     def _draw_countdown_state(self):
         """COUNTDOWN状態の描画"""
@@ -73,14 +74,79 @@ class SpeedcubeRenderer:
         else:
             success, message = self.app.sync_result
             status_text = message
-            
-        # ステータスメッセージの描画
+              # ステータスメッセージの描画
         pyxel.text(
             DC.WINDOW_WIDTH // 2 - len(status_text) * 2,
             DC.WINDOW_HEIGHT // 2,
-            status_text,
-            self.app.text_color if success is None or success else self.app.warning_color
+            status_text,            self.app.text_color if success is None or success else self.app.warning_color
         )
+
+    def _draw_stats_state(self):
+        """STATS状態の描画"""
+        # ヘッダー
+        header_text = "MONTHLY STATISTICS"
+        header_x = (DC.WINDOW_WIDTH - len(header_text) * DC.LARGE_FONT_WIDTH) // 2
+        pyxel.text(header_x, DC.SCRAMBLE_Y, header_text, self.app.text_color, self.large_font)
+        
+        # キャッシュされた月次統計情報を使用
+        if self.app.monthly_stats_cache is not None:
+            monthly_solve_count, monthly_avg_time = self.app.monthly_stats_cache
+        else:
+            # キャッシュがない場合のフォールバック（通常は発生しない）
+            monthly_solve_count = 0
+            monthly_avg_time = None
+        
+        # 表示する統計情報
+        y_pos = DC.SCRAMBLE_TEXT_Y + DC.MARGIN_Y * 2
+        
+        # 月次ソルブ数
+        solve_count_text = f"This Month Solves: {monthly_solve_count}"
+        pyxel.text(DC.MARGIN_X, y_pos, solve_count_text, self.app.text_color, self.middle_font)
+        y_pos += DC.MIDDLE_FONT_HEIGHT + DC.FONT_SPACING_Y * 2
+        
+        # 月次平均時間
+        if monthly_avg_time is not None:
+            avg_time_text = f"This Month Average: {monthly_avg_time:.2f}s"
+        else:
+            avg_time_text = "This Month Average: -"
+        pyxel.text(DC.MARGIN_X, y_pos, avg_time_text, self.app.text_color, self.middle_font)
+        y_pos += DC.MIDDLE_FONT_HEIGHT + DC.FONT_SPACING_Y * 3
+        
+        # 現在のセッション統計
+        session_stats = self.app.stats.get_stats_summary()
+        session_text = f"Session Solves: {session_stats['solve_count']}"
+        pyxel.text(DC.MARGIN_X, y_pos, session_text, self.app.text_color, self.middle_font)
+        y_pos += DC.MIDDLE_FONT_HEIGHT + DC.FONT_SPACING_Y
+        
+        if session_stats['best_time'] is not None:
+            best_text = f"Session Best: {session_stats['best_time']:.2f}s"
+        else:
+            best_text = "Session Best: -"
+        pyxel.text(DC.MARGIN_X, y_pos, best_text, self.app.text_color, self.middle_font)
+        y_pos += DC.MIDDLE_FONT_HEIGHT + DC.FONT_SPACING_Y
+        
+        if session_stats['session_avg'] is not None:
+            session_avg_text = f"Session Average: {session_stats['session_avg']:.2f}s"
+        else:
+            session_avg_text = "Session Average: -"
+        pyxel.text(DC.MARGIN_X, y_pos, session_avg_text, self.app.text_color, self.middle_font)
+          # 操作説明
+        self._draw_instruction_text("PRESS [<-] TO BACK")
+
+    def _draw_ready_instructions(self):
+        """READY状態での操作説明を描画"""
+        self._draw_instruction_text("PRESS [->] FOR STATS")
+
+    def _draw_instruction_text(self, text: str):
+        """指示テキストを画面下部に描画する共通メソッド
+        
+        Args:
+            text: 表示するテキスト
+        """
+        # 画面下部中央に配置
+        instruction_x = DC.MARGIN_X
+        instruction_y = DC.WINDOW_HEIGHT - DC.SMALL_FONT_HEIGHT
+        pyxel.text(instruction_x, instruction_y, text, self.app.text_color)
 
     def _draw_common_elements(self):
         """共通UI要素の描画処理"""

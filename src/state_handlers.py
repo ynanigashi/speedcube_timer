@@ -72,9 +72,15 @@ class BaseStateHandler(ABC):
 
 class ReadyStateHandler(BaseStateHandler):
     """READY状態のハンドラ"""
-    
     def update(self):
-        """READY状態の更新処理"""
+        """READY状態の更新処理"""        # 右矢印キーでSTATS状態に遷移
+        if pyxel.btnp(pyxel.KEY_RIGHT):
+            self.app.state = TimerState.STATS
+            pyxel.play(SC.BEEP_CHANNEL, SC.CHANGE_SOUND)
+            # STATS状態に遷移する際にキャッシュをクリア（新しい統計を計算するため）
+            self.app.monthly_stats_cache = None
+            return
+        
         # キー長押しの共通処理
         if self._handle_key_hold(
             pyxel.KEY_S,
@@ -180,10 +186,30 @@ class SyncingStateHandler(BaseStateHandler):
             self.app.sync_result = self.app.logger.sync_data()
             # 同期結果表示開始時間を記録
             self.app.sync_end_frame = pyxel.frame_count
-        # 結果表示から1秒経過したらREADY状態に戻る
-        if (pyxel.frame_count - self.app.sync_end_frame) > DC.FPS * 1.5:
+        # 結果表示から1秒経過したらREADY状態に戻る        if (pyxel.frame_count - self.app.sync_end_frame) > DC.FPS * 1.5:
             self.app.sync_result = None
             self.app.state = TimerState.READY
+
+
+class StatsStateHandler(BaseStateHandler):
+    """STATS状態のハンドラ"""
+    
+    def update(self):
+        """STATS状態の更新処理"""
+        # 初回のみ月次統計を計算
+        if self.app.monthly_stats_cache is None:
+            monthly_solve_count = self.app.stats.get_current_month_solve_count()
+            monthly_avg_time = self.app.stats.get_current_month_average_time()
+            self.app.monthly_stats_cache = (monthly_solve_count, monthly_avg_time)
+            print(f"DEBUG: 月次統計を計算しました - Solves: {monthly_solve_count}, Average: {monthly_avg_time}")
+        
+        # 左矢印キーでREADY状態に戻る
+        if pyxel.btnp(pyxel.KEY_LEFT):
+            self.app.state = TimerState.READY
+            pyxel.play(SC.BEEP_CHANNEL, SC.CHANGE_SOUND)
+            # STATS状態から出る時にキャッシュをクリア
+            self.app.monthly_stats_cache = None
+            return
 
 
 class StateHandlerManager:
@@ -199,7 +225,8 @@ class StateHandlerManager:
             TimerState.READY: ReadyStateHandler(app),
             TimerState.COUNTDOWN: CountdownStateHandler(app),
             TimerState.RUNNING: RunningStateHandler(app),
-            TimerState.SYNCING: SyncingStateHandler(app)
+            TimerState.SYNCING: SyncingStateHandler(app),
+            TimerState.STATS: StatsStateHandler(app)
         }
     
     def update(self):

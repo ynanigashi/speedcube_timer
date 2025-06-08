@@ -6,4 +6,5 @@ class TimerState(Enum):
     READY = auto()       # 準備完了状態
     COUNTDOWN = auto()   # インスペクション/カウントダウン状態
     RUNNING = auto()     # 計測中状態
-    SYNCING = auto()      # 同期中状態
+    SYNCING = auto()     # 同期中状態
+    STATS = auto()       # 統計画面状態

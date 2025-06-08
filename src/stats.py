@@ -129,8 +129,7 @@ class SpeedcubeStats:
         Args:
             year: 年（デフォルトは現在の年）
             month: 月（デフォルトは現在の月）
-            
-        Returns:
+              Returns:
             list: 指定した月の結果リスト、エラーの場合は空リスト
         """
         if not self.logger:
@@ -142,9 +141,11 @@ class SpeedcubeStats:
             year = year or now.year
             month = month or now.month
         
+        print(f"DEBUG: _get_monthly_results searching for year={year}, month={month}")        
         # ロガーから全ての結果を取得
         try:
             all_results = self.logger.get_results()
+            print(f"DEBUG: Total results from logger: {len(all_results) if all_results else 0}")
             if not all_results:
                 return []
             
@@ -154,14 +155,27 @@ class SpeedcubeStats:
                 
                 # 日時文字列をdatetimeオブジェクトに変換
                 try:
-                    date_time = datetime.fromisoformat(date_time_str)
+                    # 複数の日時形式に対応
+                    try:
+                        # ISO形式を試す
+                        date_time = datetime.fromisoformat(date_time_str)
+                    except ValueError:
+                        # 日本語形式 (YYYY/MM/DD HH:MM:SS) を試す
+                        date_time = datetime.strptime(date_time_str, "%Y/%m/%d %H:%M:%S")
+                    
+                    print(f"DEBUG: Processing result: {date_time_str}, parsed year={date_time.year}, month={date_time.month}")
                     # 指定した年月と一致するかチェック
                     if date_time.year == year and date_time.month == month:
+                        print(f"DEBUG: Match found for {date_time_str}")
                         monthly_results.append(result)
-                except ValueError:
+                    else:
+                        print(f"DEBUG: No match - looking for {year}/{month}, found {date_time.year}/{date_time.month}")
+                except ValueError as e:
                     # 日時の形式が正しくない場合はスキップ
+                    print(f"DEBUG: ValueError parsing date {date_time_str}: {e}")
                     continue
             
+            print(f"DEBUG: Found {len(monthly_results)} results for {year}/{month}")
             return monthly_results
             
         except Exception:
@@ -175,8 +189,7 @@ class SpeedcubeStats:
         Args:
             year: 年（デフォルトは現在の年）
             month: 月（デフォルトは現在の月）
-            
-        Returns:
+              Returns:
             int: 指定した月のソルブ回数
         """
         monthly_results = self._get_monthly_results(year, month)
@@ -202,16 +215,22 @@ class SpeedcubeStats:
         Returns:
             float: 指定した月の平均ソルブ時間、データがない場合はNone
         """
+        print(f"DEBUG: get_monthly_average_time called with year={year}, month={month}")
         monthly_results = self._get_monthly_results(year, month)
+        print(f"DEBUG: monthly_results length: {len(monthly_results)}")
         
         if not monthly_results:
+            print("DEBUG: No monthly results found, returning None")
             return None
         
         # タイムのみを抽出
         monthly_times = [result[1] for result in monthly_results]
+        print(f"DEBUG: monthly_times: {monthly_times}")
         
         # 平均を計算
-        return sum(monthly_times) / len(monthly_times)
+        average = sum(monthly_times) / len(monthly_times)
+        print(f"DEBUG: calculated average: {average}")
+        return average
     
     def get_current_month_average_time(self):
         """

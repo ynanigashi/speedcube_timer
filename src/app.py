@@ -33,13 +33,17 @@ class SpeedcubeApp:
         self.warning_color = DC.DEFAULT_WARNING_COLOR
         self.state = TimerState.READY
         self.space_hold_start = 0
-        self.s_key_hold_start = 0  # Sキー長押し開始時間を追加        self.countdown_start = 0
+        self.s_key_hold_start = 0  # Sキー長押し開始時間を追加
+        self.countdown_start = 0
         self.start_time = 0
         self.current_time = 0.0
         self.scramble = generate_wca_cube_scramble()
         self.finish_frame_count = 0  # 完了時刻を保存する変数を追加
         self.sync_result = None  # 同期結果を保存する変数を追加
         self.sync_end_frame = 0  # 同期終了フレームを保存する変数を追加
+        
+        # 月次統計キャッシュ（STATS状態初回時のみ計算）
+        self.monthly_stats_cache = None  # (solve_count, avg_time) のタプル
         
         # 状態ハンドラマネージャーの初期化
         self.state_handler_manager = StateHandlerManager(self)
