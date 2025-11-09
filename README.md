@@ -1431,7 +1431,7 @@ Phase 6 (統計・最適化) ← 全フェーズの成果を統合
 | Phase 1 | なし（基盤のみ） | - | ✅ 完了 |
 | Phase 1.5 | なし（データ構造拡張のみ） | - | ✅ 完了 |
 | Phase 2 | パターン選択→アルゴリズム選択→練習→記録→評価 | 手動選択のみ | ✅ 完了 |
-| Phase 3 | RANDタブからランダム練習、連続ランダム機能 | 手動選択、ランダム | 🔄 未着手 |
+| Phase 3 | RANDタブからランダム練習、連続ランダム機能 | 手動選択、ランダム | ✅ 完了 |
 | Phase 4 | プリセット連続実行 | 手動、ランダム、プリセット連続 | 🔄 未着手 |
 | Phase 5 | カスタムセット | 全モード | 🔄 未着手 |
 | Phase 6 | 完全な統計表示 | 全モード + 詳細統計 | 🔄 未着手 |
@@ -1441,20 +1441,21 @@ Phase 6 (統計・最適化) ← 全フェーズの成果を統合
 #### 実装すべき項目（全体リスト）
 
 ##### 1. 状態管理（states.py）
-- [ ] `TimerState`に以下の状態を追加
-  - [ ] `PATTERN_MODE_SELECT` - 練習モード選択画面
-  - [ ] `PATTERN_CATEGORY_SELECT` - カテゴリ選択画面
-  - [ ] `PATTERN_LIST_SELECT` - パターン個別選択画面
-  - [ ] `PATTERN_CUSTOM_SET_EDIT` - カスタムセット編集画面
-  - [ ] `PATTERN_READY` - パターン表示・準備状態
-  - [ ] `PATTERN_INSPECTION` - パターンのインスペクション
-  - [ ] `PATTERN_RUNNING` - パターンタイマー実行中
-  - [ ] `PATTERN_FINISH` - パターン完了・結果表示
-- [ ] パターン練習用の状態変数管理
-  - [ ] 現在の練習モード（ランダム/手動/プリセット/カスタム）
-  - [ ] 実行中のパターンセット
-  - [ ] 現在のパターンインデックス
-  - [ ] セットの進捗状況
+- [x] `TimerState`に以下の状態を追加（Phase 2で実装済み）
+  - [x] `PATTERN_LIST_SELECT` - パターン個別選択画面
+  - [x] `PATTERN_ALGORITHM_SELECT` - アルゴリズム選択画面
+  - [x] `PATTERN_READY` - パターン表示・準備状態
+  - [x] `PATTERN_FINISH` - パターン完了・結果表示
+  - [ ] `PATTERN_MODE_SELECT` - 練習モード選択画面（Phase 4以降）
+  - [ ] `PATTERN_CUSTOM_SET_EDIT` - カスタムセット編集画面（Phase 5）
+- [x] パターン練習用の状態変数管理（Phase 2-3で実装済み）
+  - [x] 現在のパターン (`current_pattern`)
+  - [x] 現在のアルゴリズム (`current_algorithm`)
+  - [x] ランダムモード (`random_mode`, `random_category`)
+  - [x] 重複回避履歴 (`recent_random_patterns`)
+  - [ ] 実行中のパターンセット（Phase 4）
+  - [ ] 現在のパターンインデックス（Phase 4）
+  - [ ] セットの進捗状況（Phase 4）
 
 ##### 2. パターンデータ管理
 - [x] パターン定義ファイルの作成（`patterns.py`）（Phase 1で実装済み）
@@ -1469,14 +1470,10 @@ Phase 6 (統計・最適化) ← 全フェーズの成果を統合
         description: str     # パターンの説明
         difficulty: int      # 難易度（1-5）
     ```
-  - [x] パターンマスターリストの実装（Phase 1: 10パターン、Phase 1.5: JSON化）
-    - [x] OLLパターン（5種類 - 検証用）
-    - [x] PLLパターン（3種類 - 検証用）
-    - [x] F2Lパターン（2種類 - 検証用）
-    - [ ] 全OLLパターン（57種類） - Phase 6で追加予定
-    - [ ] 全PLLパターン（21種類） - Phase 6で追加予定
-    - [ ] 全F2Lパターン（41種類） - Phase 6で追加予定
-    - [ ] Crossパターン（基本8種類） - Phase 6で追加予定
+  - [x] パターンマスターリストの実装（Phase 2で完了）
+    - [x] 全OLLパターン（57種類）
+    - [x] 全PLLパターン（21種類）
+    - [x] 合計78パターンをJSON管理 (`data/patterns.json`)
 - [x] アルゴリズム定義（Phase 1.5で実装済み）
   - [x] アルゴリズムクラスの実装
     ```python
@@ -1492,16 +1489,11 @@ Phase 6 (統計・最適化) ← 全フェーズの成果を統合
         is_default: bool = False   # デフォルトアルゴリズム
         notes: str = ""            # 備考
     ```
-  - [x] アルゴリズムマスターリストの実装（9アルゴリズム）
-    - [x] PLL_Ua（3種類：Standard, Alternative, RUD）
-    - [x] PLL_Aa（2種類：Standard, Alternative）
-    - [x] PLL_H（2種類：Standard, Alternative）
-    - [x] OLL_21（2種類：Standard, Alternative）
-  - [x] JSON管理機能
-    - [x] `data/patterns.json` - パターンマスターデータ
-    - [x] `data/algorithms.json` - アルゴリズムマスターデータ
-    - [x] JSON読み込み機能
-    - [x] フォールバック機能
+  - [x] アルゴリズムマスターリストの実装（Phase 2で完了）
+    - [x] 78パターンに対する複数アルゴリズム対応
+    - [x] JSON管理 (`data/algorithms.json`)
+    - [x] デフォルトアルゴリズム設定
+    - [x] ユーザー選択アルゴリズムの保存・復元
 - [ ] パターンセット管理クラス（`pattern_sets.py`）
   - [ ] `PatternSet`クラス
     ```python
@@ -1523,10 +1515,10 @@ Phase 6 (統計・最適化) ← 全フェーズの成果を統合
     - [ ] セット読み込み
     - [ ] セット編集（追加・削除・並び替え）
     - [ ] セット削除
-- [ ] パターン選択ロジック
-  - [ ] ランダム選択（カテゴリ指定）
-  - [ ] 手動選択（パターンリストから）
-  - [ ] セット順次実行
+- [x] パターン選択ロジック（Phase 2-3で実装済み）
+  - [x] ランダム選択（OLL/PLL/ALL カテゴリ指定、重複回避）
+  - [x] 手動選択（パターンリストから、ページ送り対応）
+  - [ ] セット順次実行（Phase 4）
 
 ##### 3. データベース拡張（stats.py, log_handler.py）
 - [x] パターン練習用テーブルの追加
@@ -1581,29 +1573,23 @@ Phase 6 (統計・最適化) ← 全フェーズの成果を統合
   CREATE INDEX idx_pattern_solves_category ON pattern_solves(pattern_category);
   CREATE INDEX idx_pattern_solves_timestamp ON pattern_solves(timestamp);
   ```
-- [x] パターン別統計取得メソッドの実装（Phase 1で実装済み）
+- [x] パターン別統計取得メソッドの実装（Phase 1-2で実装済み）
   - [x] `get_pattern_times(pattern_id, limit=None)` - 特定パターンの全タイム取得
   - [x] `get_pattern_best(pattern_id)` - パターンのベストタイム
   - [x] `get_pattern_count(pattern_id)` - パターンの試技回数
-  - [ ] `get_pattern_average(pattern_id)` - パターンの平均タイム
-  - [ ] `get_pattern_ao5(pattern_id)` - パターンのAO5
-  - [ ] `get_pattern_ao12(pattern_id)` - パターンのAO12
-  - [ ] `get_all_patterns_summary()` - 全パターンのサマリー取得
-  - [ ] `get_category_patterns_summary(category)` - カテゴリ別サマリー
-  - [ ] `get_weak_patterns(threshold=None)` - 苦手パターン識別
-  - [ ] `get_unpracticed_patterns(category=None)` - 未練習パターン取得
-- [x] アルゴリズム別統計取得メソッドの実装（Phase 1.5で実装済み）
+  - [x] `save_pattern_solve()` - パターン解法の記録
+  - [ ] `get_pattern_average(pattern_id)` - パターンの平均タイム（Phase 6）
+  - [ ] `get_pattern_ao5(pattern_id)` - パターンのAO5（Phase 6）
+  - [ ] `get_pattern_ao12(pattern_id)` - パターンのAO12（Phase 6）
+- [x] アルゴリズム別統計取得メソッドの実装（Phase 2で実装済み）
   - [x] `get_algorithm_times(algorithm_id, limit=None)` - アルゴリズムの全タイム取得
   - [x] `get_algorithm_best(algorithm_id)` - アルゴリズムのベストタイム
   - [x] `get_algorithm_count(algorithm_id)` - アルゴリズムの試技回数
-  - [ ] `get_algorithm_average(algorithm_id)` - アルゴリズムの平均タイム
-  - [ ] `get_algorithm_ao5(algorithm_id)` - アルゴリズムのAO5
-- [ ] ユーザー設定管理メソッドの実装（Phase 2で実装予定）
-  - [ ] `get_user_selected_algorithm(pattern_id)` - ユーザーが選択したアルゴリズム取得
-  - [ ] `set_user_selected_algorithm(pattern_id, algorithm_id)` - アルゴリズム選択を保存
-  - [ ] `get_algorithm_rating(algorithm_id)` - アルゴリズム評価取得
-  - [ ] `set_algorithm_rating(algorithm_id, speed, ergonomics, is_favorite, notes)` - 評価保存
-  - [ ] `increment_algorithm_practice_count(algorithm_id)` - 練習回数カウント
+- [x] ユーザー設定管理メソッドの実装（Phase 2で実装済み）
+  - [x] `get_user_selected_algorithm(pattern_id)` - ユーザーが選択したアルゴリズム取得
+  - [x] `set_user_selected_algorithm(pattern_id, algorithm_id)` - アルゴリズム選択を保存
+  - [x] `get_algorithm_rating(algorithm_id)` - アルゴリズム評価取得
+  - [x] `set_algorithm_rating(algorithm_id, rating)` - 評価保存（1-5）
 - [ ] カスタムセット管理メソッド
   - [ ] `save_custom_set(set_id, set_name, pattern_ids)` - セット保存
   - [ ] `load_custom_set(set_id)` - セット読み込み
@@ -1612,32 +1598,25 @@ Phase 6 (統計・最適化) ← 全フェーズの成果を統合
   - [ ] `update_custom_set(set_id, set_name, pattern_ids)` - セット更新
 
 ##### 4. UI/UX実装（renderer.py）
-- [ ] **モード選択画面**の描画
-  - [ ] 4つのモードボタン
-    - [ ] ランダム単発実行
-    - [ ] 手動パターン選択
-    - [ ] プリセット連続実行
-    - [ ] カスタム連続実行
-  - [ ] 各モードの説明テキスト
-  - [ ] 選択カーソル表示
+- [x] **パターン選択画面**の描画（Phase 2-3で実装済み）
+  - [x] カテゴリタブ（RAND/PLL/OLL）
+  - [x] RANDタブ：カテゴリ選択UI（OLL/PLL/ALL）
+  - [x] PLL/OLLタブ：パターン一覧表示
+    - [x] 試技回数とベストタイム表示
+    - [x] 選択中のアルゴリズム表示
+    - [x] カーソル/選択ハイライト
+    - [x] ページ送り（左右キー、5件単位）
+    - [x] 循環ナビゲーション
 
-- [ ] **カテゴリ選択画面**の描画（ランダム/プリセットモード用）
-  - [ ] カテゴリボタン（OLL/PLL/F2L/Cross）
-  - [ ] 各カテゴリの統計プレビュー
-    - [ ] 総パターン数
-    - [ ] 練習済みパターン数
-    - [ ] 未練習パターン数
-    - [ ] カテゴリ平均タイム
+- [x] **アルゴリズム選択画面**の描画（Phase 2で実装済み）
+  - [x] パターン名表示
+  - [x] アルゴリズム一覧（複数ある場合）
+  - [x] 各アルゴリズムの詳細（ムーブ、評価）
+  - [x] 選択カーソル表示
 
-- [ ] **パターン個別選択画面**の描画（手動選択モード用）
-  - [ ] パターン一覧（番号付き、グリッド表示）
-  - [ ] 各パターンの統計プレビュー
-    - [ ] 試技回数
-    - [ ] ベストタイム
-    - [ ] 平均タイム
-    - [ ] 未練習の場合は「---」表示
-  - [ ] カーソル/選択ハイライト
-  - [ ] ページネーション（パターン数が多い場合）
+- [ ] **モード選択画面**の描画（Phase 4以降）
+  - [ ] プリセット連続実行
+  - [ ] カスタム連続実行
 
 - [ ] **カスタムセット編集画面**の描画
   - [ ] 保存済みセット一覧
@@ -1652,122 +1631,60 @@ Phase 6 (統計・最適化) ← 全フェーズの成果を統合
     - [ ] 追加ボタン
   - [ ] パターンリスト表示（並び替え可能）
 
-- [ ] **パターン準備画面**の描画
-  - [ ] パターン名の大きな表示（上部）
-  - [ ] パターンカテゴリ表示
-  - [ ] セットアップムーブ表示
-  - [ ] 現在のパターン統計表示
-    - [ ] 試技回数
-    - [ ] ベストタイム
-    - [ ] 平均タイム
-    - [ ] AO5
-  - [ ] 連続実行モードの場合
-    - [ ] 進捗表示（例：「15/57」）
-    - [ ] プログレスバー
-  - [ ] 操作ガイド表示
-    - [ ] 「PRESS [SPACE] TO START」
-    - [ ] 「PRESS [S] TO SKIP」
-    - [ ] 「PRESS [ESC] TO EXIT」
+- [x] **パターン準備画面**の描画（Phase 2で実装済み）
+  - [x] パターン名表示
+  - [x] アルゴリズム情報表示（名前、ムーブ）
+  - [x] 統計情報表示（試技回数、ベストタイム）
+  - [x] 操作ガイド表示（SPACE長押しでスタート）
 
-- [ ] **パターン実行画面**の描画（通常タイマーと同様）
-  - [ ] パターン名表示（小さめ、上部）
-  - [ ] タイマー表示（大きく、中央）
-  - [ ] インスペクションタイムカウントダウン
-  - [ ] 実行中の視覚フィードバック
+- [x] **パターン実行画面**の描画（Phase 2で実装済み）
+  - [x] パターン名表示（上部）
+  - [x] アルゴリズム情報表示
+  - [x] タイマー表示（中央）
 
-- [ ] **パターン結果画面**の描画
-  - [ ] パターン名表示
-  - [ ] 今回のタイム（大きく表示）
-  - [ ] 記録更新の表示
-    - [ ] ベスト更新時：「NEW BEST!」（強調表示）
-    - [ ] AO5更新時：「NEW AO5!」
-  - [ ] 統計情報
-    - [ ] ベストタイム
-    - [ ] 平均タイム
-    - [ ] 直近5回のタイム表示
-    - [ ] AO5
-  - [ ] 連続実行モードの場合
-    - [ ] 進捗状況（例：「15/57 完了」）
-    - [ ] 「NEXT: パターン名」表示
-  - [ ] 操作ガイド
-    - [ ] 「PRESS [SPACE] FOR NEXT」
-    - [ ] 「PRESS [R] TO RETRY」
-    - [ ] 「PRESS [ESC] TO EXIT」
+- [x] **パターン完了画面**の描画（Phase 2-3で実装済み）
+  - [x] パターン名とタイム表示
+  - [x] 評価入力（1-5キー）
+  - [x] 操作ガイド（SPACE: 次へ、R: リトライ、ESC: 戻る）
+  - [x] ランダムモード対応（連続練習）
 
 ##### 5. 状態ハンドラ（state_handlers.py）
-- [ ] **PatternModeSelectHandler** - モード選択ハンドラ
-  - [ ] 4つのモード選択処理
-  - [ ] カーソル移動（上下キー）
-  - [ ] モード決定（Enterキー/スペースキー）
-  - [ ] モード選択に応じた次の状態遷移
+- [x] **PatternListSelectHandler** - パターン選択ハンドラ（Phase 2-3で実装済み）
+  - [x] カテゴリタブ切り替え（TABキー）
+  - [x] RANDタブ処理（カテゴリ選択、ランダム抽出）
+  - [x] パターン一覧表示制御（PLL/OLLタブ）
+  - [x] カーソル移動（上下キー、循環）
+  - [x] ページ送り（左右キー、5件単位）
+  - [x] パターン決定（ENTERキー）
+  - [x] アルゴリズム選択画面遷移（Aキー）
+  - [x] READY状態に戻る（ESCキー、状態クリア）
 
-- [ ] **PatternCategorySelectHandler** - カテゴリ選択ハンドラ
-  - [ ] カテゴリ選択処理（OLL/PLL/F2L/Cross）
-  - [ ] ランダムモード時：カテゴリからランダムパターン選択→実行へ
-  - [ ] プリセットモード時：カテゴリの全パターンをセット→連続実行へ
+- [x] **PatternAlgorithmSelectHandler** - アルゴリズム選択ハンドラ（Phase 2で実装済み）
+  - [x] アルゴリズム一覧表示
+  - [x] カーソル移動（上下キー）
+  - [x] アルゴリズム決定（ENTERキー、ユーザー選択保存）
+  - [x] パターン一覧に戻る（ESCキー）
 
-- [ ] **PatternListSelectHandler** - パターン個別選択ハンドラ
-  - [ ] パターン一覧の表示制御
-  - [ ] カーソル移動（上下左右キー）
-  - [ ] ページ切り替え（PageUp/PageDown）
-  - [ ] パターン決定（Enterキー/スペースキー）
-  - [ ] 選択パターンで実行開始
+- [x] **PatternReadyHandler** - パターン準備ハンドラ（Phase 2で実装済み）
+  - [x] スペースキー長押し検知→タイマー開始
+  - [x] パターン一覧に戻る（ESCキー）
 
-- [ ] **PatternCustomSetEditHandler** - カスタムセット編集ハンドラ
-  - [ ] セット一覧表示・選択
-  - [ ] 新規セット作成
-  - [ ] セット編集モード
-    - [ ] パターン追加
-    - [ ] パターン削除
-    - [ ] パターン並び替え（上下移動）
-  - [ ] セット保存
-  - [ ] セット削除（確認ダイアログ）
-  - [ ] セット決定→連続実行へ
+- [x] **PatternFinishHandler** - パターン完了ハンドラ（Phase 2-3で実装済み）
+  - [x] 評価入力（1-5キー）
+  - [x] リトライ処理（Rキー）
+  - [x] 次の動作処理
+    - [x] SPACE/ENTER: 通常モードは一覧へ、ランダムモードは次のパターンへ
+    - [x] ESC: ランダムモード解除して一覧へ
+  - [x] 評価の自動保存
 
-- [ ] **PatternReadyHandler** - パターン準備ハンドラ
-  - [ ] パターン情報の表示制御
-  - [ ] スペースキー長押し検知→インスペクション開始
-  - [ ] スキップキー（S）処理
-    - [ ] 単発モード：モード選択に戻る
-    - [ ] 連続モード：次のパターンへ
-  - [ ] ESCキー：パターンモード終了
+- [ ] **プリセット連続実行ハンドラ**（Phase 4）
+  - [ ] セット進捗管理
+  - [ ] 次のパターンへ自動遷移
+  - [ ] セット完了処理
 
-- [ ] **PatternInspectionHandler** - パターンインスペクションハンドラ
-  - [ ] インスペクションタイマー（15秒）
-  - [ ] カウントダウン音再生（8秒、12秒、15秒）
-  - [ ] スペースキー長押し検知→タイマー開始
-
-- [ ] **PatternRunningHandler** - パターン実行ハンドラ
-  - [ ] タイマー計測
-  - [ ] スペースキー検知→タイマー停止
-  - [ ] タイム記録処理
-    - [ ] パターンID
-    - [ ] タイム
-    - [ ] 練習モード
-    - [ ] セットID（該当する場合）
-
-- [ ] **PatternFinishHandler** - パターン完了ハンドラ
-  - [ ] 結果表示制御
-  - [ ] 記録更新判定（ベスト/AO5）
-  - [ ] 次の動作処理
-    - [ ] スペースキー：次のパターン/終了
-    - [ ] Rキー：同じパターンを再実行
-    - [ ] ESCキー：パターンモード終了
-  - [ ] 連続実行モードの進捗管理
-    - [ ] 次のパターンへ遷移
-    - [ ] 全パターン完了時の処理
-
-- [ ] **共通処理**
-  - [ ] パターンデータの管理
-  - [ ] 実行セットの管理
-  - [ ] 進捗状況の追跡
-  - [ ] 統計情報の更新
-
-- [ ] **キーバインド定義**
-  - [ ] モード選択画面
-    - [ ] 上下キー：選択移動
-    - [ ] Enter/スペース：決定
-    - [ ] ESC：メインメニューに戻る
+- [ ] **カスタムセット編集ハンドラ**（Phase 5）
+  - [ ] セット作成・編集・削除
+  - [ ] パターン追加・削除・並び替え
   - [ ] カテゴリ/パターン選択画面
     - [ ] 上下左右キー：カーソル移動
     - [ ] Enter/スペース：決定
