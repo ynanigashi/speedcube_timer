@@ -21,6 +21,8 @@ stateDiagram-v2
     
     READY --> STATS: 右矢印キー
     STATS --> READY: 左矢印キー
+    READY --> SYNCING: Sキー長押し
+    SYNCING --> READY: 同期結果表示後
     
     READY --> PATTERN_LIST_SELECT: Pキー
     PATTERN_LIST_SELECT --> READY: ESCキー
@@ -36,6 +38,8 @@ stateDiagram-v2
         - 通常タイマー
         - パターン練習
         - 統計表示
+        - 手動同期（Sキー長押し）
+        - 背景色切り替え（Cキー）
     end note
 ```
 
@@ -49,6 +53,10 @@ flowchart TD
     
     Ready -->|右矢印| Stats[STATS<br/>統計表示画面]
     Stats -->|左矢印| Ready
+    Ready -->|S長押し| Sync[SYNCING<br/>手動同期結果表示]
+    Sync --> Ready
+    Ready -->|C| Color[背景色切替]
+    Color --> Ready
     
     Ready -->|SPACE長押し| Countdown[COUNTDOWN<br/>インスペクション<br/>15秒カウントダウン]
     
@@ -73,6 +81,8 @@ flowchart TD
     style SaveRecord fill:#e1ffe1
     style CancelCountdown fill:#ffe1e1
     style CancelRunning fill:#ffe1e1
+    style Sync fill:#e1ffe1
+    style Color fill:#fff4e1
 ```
 
 ---

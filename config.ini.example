@@ -1,8 +1,7 @@
-[Google Sheets]
-spreadsheet_id = YOUR_SPREADSHEET_ID_HERE
+[GoogleSpreadsheet]
+spreadsheet_key = YOUR_SPREADSHEET_KEY_HERE
 sheet_name = YOUR_SHEET_NAME_HERE
-credentials_file = PASS_TO_YOUR_CREDENTIALS_FILE
+credentials_file = path/to/credentials.json
 
-[Application]
-max_results = 12
-debug_mode = false
+[Database]
+db_path = data/speedcube.db
