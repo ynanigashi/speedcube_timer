@@ -65,7 +65,7 @@ class TextConstants:
     AO12_FORMAT = "AO12: {:.2f}"
     AO_EMPTY = "{}: -"
     SOLVE_FORMAT = "#{:02d}:  {:.2f}"  # 例: #01: 12.34
-    QUIT = "PRESS [ESC] TO QUIT"
+    QUIT = "PRESS [Q] TO QUIT"
 
 
 class SoundConfig:

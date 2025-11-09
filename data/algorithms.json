@@ -1,0 +1,1588 @@
+{
+  "algorithms": [
+    {
+      "id": "OLL_01_standard",
+      "pattern_id": "OLL_01",
+      "name": "Standard",
+      "moves": "R U2 R2 F R F' U2 R' F R F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_01_alternative_1",
+      "pattern_id": "OLL_01",
+      "name": "Alternative 1",
+      "moves": "y R U' R2 D' r U' r' D R2 U R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "D回転使用"
+    },
+    {
+      "id": "OLL_01_alternative_2",
+      "pattern_id": "OLL_01",
+      "name": "Alternative 2",
+      "moves": "r' U' R U' R' U2 r U r U2 R' U' R U' r'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "OLL_02_standard",
+      "pattern_id": "OLL_02",
+      "name": "Standard",
+      "moves": "F R U R' U' F' f R U R' U' f'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_02_alternative",
+      "pattern_id": "OLL_02",
+      "name": "Alternative",
+      "moves": "y2 f U R U' R' S' U R U' R' F'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "S回転使用"
+    },
+    {
+      "id": "OLL_03_standard",
+      "pattern_id": "OLL_03",
+      "name": "Standard",
+      "moves": "y' f R U R' U' f' U' F R U R' U' F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_03_alternative",
+      "pattern_id": "OLL_03",
+      "name": "Alternative",
+      "moves": "R' F2 R2 U2 R' F R U2 R2 F2 R",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "F2回転使用"
+    },
+    {
+      "id": "OLL_04_standard",
+      "pattern_id": "OLL_04",
+      "name": "Standard",
+      "moves": "y' f R U R' U' f' U F R U R' U' F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_04_alternative",
+      "pattern_id": "OLL_04",
+      "name": "Alternative",
+      "moves": "F U R U' R' F' U' F R U R' U' F'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_05_standard",
+      "pattern_id": "OLL_05",
+      "name": "Standard",
+      "moves": "y2 r' U2 R U R' U r",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_05_alternative",
+      "pattern_id": "OLL_05",
+      "name": "Alternative",
+      "moves": "y2 l' U2 L U L' U l",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "左手バージョン"
+    },
+    {
+      "id": "OLL_06_standard",
+      "pattern_id": "OLL_06",
+      "name": "Standard",
+      "moves": "r U2 R' U' R U' r'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的（Fat anti-sune）"
+    },
+    {
+      "id": "OLL_06_alternative",
+      "pattern_id": "OLL_06",
+      "name": "Alternative",
+      "moves": "y2 l U2 L' U' L U' l'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "左手バージョン"
+    },
+    {
+      "id": "OLL_07_standard",
+      "pattern_id": "OLL_07",
+      "name": "Standard",
+      "moves": "r U R' U R U2 r'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的（Fat sune）"
+    },
+    {
+      "id": "OLL_07_alternative",
+      "pattern_id": "OLL_07",
+      "name": "Alternative",
+      "moves": "y2 l U L' U L U2 l'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "左手バージョン"
+    },
+    {
+      "id": "OLL_08_standard",
+      "pattern_id": "OLL_08",
+      "name": "Standard",
+      "moves": "y2 r' U' R U' R' U2 r",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_08_alternative",
+      "pattern_id": "OLL_08",
+      "name": "Alternative",
+      "moves": "l' U' L U' L' U2 l",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "左手バージョン"
+    },
+    {
+      "id": "OLL_09_standard",
+      "pattern_id": "OLL_09",
+      "name": "Standard",
+      "moves": "y R U R' U' R' F R2 U R' U' F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_09_alternative",
+      "pattern_id": "OLL_09",
+      "name": "Alternative",
+      "moves": "y2 F' U' F r U' r' U r U r'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "OLL_10_standard",
+      "pattern_id": "OLL_10",
+      "name": "Standard",
+      "moves": "R U R' U R' F R F' R U2 R'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_10_alternative",
+      "pattern_id": "OLL_10",
+      "name": "Alternative",
+      "moves": "y F U F' R' F R U' R' F' R",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_11_standard",
+      "pattern_id": "OLL_11",
+      "name": "Standard",
+      "moves": "r' R2 U R' U R U2 R' U M'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_11_alternative",
+      "pattern_id": "OLL_11",
+      "name": "Alternative",
+      "moves": "y2 r U R' U R' F R F' R U2 r'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_12_standard",
+      "pattern_id": "OLL_12",
+      "name": "Standard",
+      "moves": "F R U R' U' F' U F R U R' U' F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_12_alternative",
+      "pattern_id": "OLL_12",
+      "name": "Alternative",
+      "moves": "y' r R2 U' R U' R' U2 R U' R r'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "OLL_13_standard",
+      "pattern_id": "OLL_13",
+      "name": "Standard",
+      "moves": "F U R U' R2 F' R U R U' R'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_13_alternative",
+      "pattern_id": "OLL_13",
+      "name": "Alternative",
+      "moves": "F U R U2 R' U' R U R' F'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_14_standard",
+      "pattern_id": "OLL_14",
+      "name": "Standard",
+      "moves": "R' F R U R' F' R F U' F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_14_alternative",
+      "pattern_id": "OLL_14",
+      "name": "Alternative",
+      "moves": "r U R' U' r' F R2 U R' U' F'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "OLL_15_standard",
+      "pattern_id": "OLL_15",
+      "name": "Standard",
+      "moves": "y2 l' U' l L' U' L U l' U l",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_15_alternative",
+      "pattern_id": "OLL_15",
+      "name": "Alternative",
+      "moves": "r' U' r R' U' R U r' U r",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "OLL_16_standard",
+      "pattern_id": "OLL_16",
+      "name": "Standard",
+      "moves": "r U r' R U R' U' r U' r'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_16_alternative",
+      "pattern_id": "OLL_16",
+      "name": "Alternative",
+      "moves": "y2 F R U R' U' F' R U2 R' U' R U' R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_17_standard",
+      "pattern_id": "OLL_17",
+      "name": "Standard",
+      "moves": "R U R' U R' F R F' U2 R' F R F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_17_alternative",
+      "pattern_id": "OLL_17",
+      "name": "Alternative",
+      "moves": "y2 F R' F' R2 r' U R U' R' U' M'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "OLL_18_standard",
+      "pattern_id": "OLL_18",
+      "name": "Standard",
+      "moves": "y R U2 R2 F R F' U2 M' U R U' r'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_18_alternative",
+      "pattern_id": "OLL_18",
+      "name": "Alternative",
+      "moves": "r U R' U R U2 r2 U' R U' R' U2 r",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "OLL_19_standard",
+      "pattern_id": "OLL_19",
+      "name": "Standard",
+      "moves": "r' R U R U R' U' r R2 F R F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_19_alternative",
+      "pattern_id": "OLL_19",
+      "name": "Alternative",
+      "moves": "y S' R U R' S U' R' F R F'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "S回転使用"
+    },
+    {
+      "id": "OLL_20_standard",
+      "pattern_id": "OLL_20",
+      "name": "Standard",
+      "moves": "r' R U R U R' U' M2 U R U' r'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_20_alternative",
+      "pattern_id": "OLL_20",
+      "name": "Alternative",
+      "moves": "r U R' U' M2 U R U' R' U' M'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "M回転使用"
+    },
+    {
+      "id": "OLL_21_standard",
+      "pattern_id": "OLL_21",
+      "name": "Standard",
+      "moves": "y R U2 R' U' R U R' U' R U' R'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的（Anti-sune）"
+    },
+    {
+      "id": "OLL_21_alternative_1",
+      "pattern_id": "OLL_21",
+      "name": "Alternative 1",
+      "moves": "y R' U2 R U R' U' R U R' U R",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別の向き"
+    },
+    {
+      "id": "OLL_21_alternative_2",
+      "pattern_id": "OLL_21",
+      "name": "Alternative 2",
+      "moves": "R U R' U R U' R' U R U2 R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "Sune方向"
+    },
+    {
+      "id": "OLL_22_standard",
+      "pattern_id": "OLL_22",
+      "name": "Standard",
+      "moves": "R U2 R2 U' R2 U' R2 U2 R",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_22_alternative",
+      "pattern_id": "OLL_22",
+      "name": "Alternative",
+      "moves": "R' U2 R2 U R2 U R2 U2 R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "ミラー"
+    },
+    {
+      "id": "OLL_23_standard",
+      "pattern_id": "OLL_23",
+      "name": "Standard",
+      "moves": "y2 R2 D' R U2 R' D R U2 R",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_23_alternative",
+      "pattern_id": "OLL_23",
+      "name": "Alternative",
+      "moves": "R2 D R' U2 R D' R' U2 R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "ミラー"
+    },
+    {
+      "id": "OLL_24_standard",
+      "pattern_id": "OLL_24",
+      "name": "Standard",
+      "moves": "r U R' U' r' F R F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_24_alternative",
+      "pattern_id": "OLL_24",
+      "name": "Alternative",
+      "moves": "y2 R' F' r U R U' r' F",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_25_standard",
+      "pattern_id": "OLL_25",
+      "name": "Standard",
+      "moves": "F' r U R' U' r' F R",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_25_alternative",
+      "pattern_id": "OLL_25",
+      "name": "Alternative",
+      "moves": "F R' F' r U R U' r'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_26_standard",
+      "pattern_id": "OLL_26",
+      "name": "Standard",
+      "moves": "y R U2 R' U' R U' R'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的（Anti-sune）"
+    },
+    {
+      "id": "OLL_26_alternative",
+      "pattern_id": "OLL_26",
+      "name": "Alternative",
+      "moves": "R' U' R U' R' U2 R",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "ミラー"
+    },
+    {
+      "id": "OLL_27_standard",
+      "pattern_id": "OLL_27",
+      "name": "Standard",
+      "moves": "R U R' U R U2 R'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的（Sune）"
+    },
+    {
+      "id": "OLL_27_alternative",
+      "pattern_id": "OLL_27",
+      "name": "Alternative",
+      "moves": "y' R' U2 R U R' U R",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "ミラー"
+    },
+    {
+      "id": "OLL_28_standard",
+      "pattern_id": "OLL_28",
+      "name": "Standard",
+      "moves": "r U R' U' M U R U' R'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的（Arrow）"
+    },
+    {
+      "id": "OLL_28_alternative",
+      "pattern_id": "OLL_28",
+      "name": "Alternative",
+      "moves": "y2 M' U M U2 M' U M",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "M回転のみ使用"
+    },
+    {
+      "id": "OLL_29_standard",
+      "pattern_id": "OLL_29",
+      "name": "Standard",
+      "moves": "y R U R' U' R U' R' F' U' F R U R'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_29_alternative",
+      "pattern_id": "OLL_29",
+      "name": "Alternative",
+      "moves": "r2 D' r U r' D r2 U' r' U' r",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "D回転使用"
+    },
+    {
+      "id": "OLL_30_standard",
+      "pattern_id": "OLL_30",
+      "name": "Standard",
+      "moves": "y2 F R' F R2 U' R' U' R U R' F2",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_30_alternative",
+      "pattern_id": "OLL_30",
+      "name": "Alternative",
+      "moves": "y2 F U R U2 R' U' R U2 R' U' F'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_31_standard",
+      "pattern_id": "OLL_31",
+      "name": "Standard",
+      "moves": "R' U' F U R U' R' F' R",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_31_alternative",
+      "pattern_id": "OLL_31",
+      "name": "Alternative",
+      "moves": "y S R U R' U' f' U' F",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "S回転使用"
+    },
+    {
+      "id": "OLL_32_standard",
+      "pattern_id": "OLL_32",
+      "name": "Standard",
+      "moves": "R U B' U' R' U R B R'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_32_alternative",
+      "pattern_id": "OLL_32",
+      "name": "Alternative",
+      "moves": "y2 L U F' U' L' U L F L'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "左手バージョン"
+    },
+    {
+      "id": "OLL_33_standard",
+      "pattern_id": "OLL_33",
+      "name": "Standard",
+      "moves": "R U R' U' R' F R F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的（T-shape）"
+    },
+    {
+      "id": "OLL_33_alternative",
+      "pattern_id": "OLL_33",
+      "name": "Alternative",
+      "moves": "y2 L' U' L U L F' L' F",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "左手バージョン"
+    },
+    {
+      "id": "OLL_34_standard",
+      "pattern_id": "OLL_34",
+      "name": "Standard",
+      "moves": "y2 R U R2 U' R' F R U R U' F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_34_alternative",
+      "pattern_id": "OLL_34",
+      "name": "Alternative",
+      "moves": "y f R f' U' r' U' R U M'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "OLL_35_standard",
+      "pattern_id": "OLL_35",
+      "name": "Standard",
+      "moves": "R U2 R2 F R F' R U2 R'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_35_alternative",
+      "pattern_id": "OLL_35",
+      "name": "Alternative",
+      "moves": "y2 R2 F R F' R U2 R' U R U2 R' U' R",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_36_standard",
+      "pattern_id": "OLL_36",
+      "name": "Standard",
+      "moves": "y2 L' U' L U' L' U L U L F' L' F",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_36_alternative",
+      "pattern_id": "OLL_36",
+      "name": "Alternative",
+      "moves": "R' U' R U' R' U R U R B' R' B",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "右手バージョン"
+    },
+    {
+      "id": "OLL_37_standard",
+      "pattern_id": "OLL_37",
+      "name": "Standard",
+      "moves": "F R U' R' U' R U R' F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_37_alternative",
+      "pattern_id": "OLL_37",
+      "name": "Alternative",
+      "moves": "F R' F' R U R U' R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_38_standard",
+      "pattern_id": "OLL_38",
+      "name": "Standard",
+      "moves": "R U R' U R U' R' U' R' F R F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_38_alternative",
+      "pattern_id": "OLL_38",
+      "name": "Alternative",
+      "moves": "r U R' U' r' F R U R U' R' F'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "OLL_39_standard",
+      "pattern_id": "OLL_39",
+      "name": "Standard",
+      "moves": "y L F' L' U' L U F U' L'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_39_alternative",
+      "pattern_id": "OLL_39",
+      "name": "Alternative",
+      "moves": "y' R B' R' U' R U B U' R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "右手バージョン"
+    },
+    {
+      "id": "OLL_40_standard",
+      "pattern_id": "OLL_40",
+      "name": "Standard",
+      "moves": "y R' F R U R' U' F' U R",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_40_alternative",
+      "pattern_id": "OLL_40",
+      "name": "Alternative",
+      "moves": "y' f R' F' R U R U' R' S",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "S回転使用"
+    },
+    {
+      "id": "OLL_41_standard",
+      "pattern_id": "OLL_41",
+      "name": "Standard",
+      "moves": "y2 R U R' U R U2 R' F R U R' U' F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_41_alternative",
+      "pattern_id": "OLL_41",
+      "name": "Alternative",
+      "moves": "y2 F U R2 D R' U' R D' R2 F'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "D回転使用"
+    },
+    {
+      "id": "OLL_42_standard",
+      "pattern_id": "OLL_42",
+      "name": "Standard",
+      "moves": "R' U' R U' R' U2 R F R U R' U' F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_42_alternative",
+      "pattern_id": "OLL_42",
+      "name": "Alternative",
+      "moves": "R' U' R U' R' U2 R U R' F' U' F U R",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_43_standard",
+      "pattern_id": "OLL_43",
+      "name": "Standard",
+      "moves": "y R' U' F' U F R",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_43_alternative",
+      "pattern_id": "OLL_43",
+      "name": "Alternative",
+      "moves": "y' r' F' U' F U r",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "OLL_44_standard",
+      "pattern_id": "OLL_44",
+      "name": "Standard",
+      "moves": "f R U R' U' f'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_44_alternative",
+      "pattern_id": "OLL_44",
+      "name": "Alternative",
+      "moves": "y2 F U R U' R' F'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_45_standard",
+      "pattern_id": "OLL_45",
+      "name": "Standard",
+      "moves": "F R U R' U' F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的（T-shape）"
+    },
+    {
+      "id": "OLL_45_alternative",
+      "pattern_id": "OLL_45",
+      "name": "Alternative",
+      "moves": "y2 f U R U' R' f'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "OLL_46_standard",
+      "pattern_id": "OLL_46",
+      "name": "Standard",
+      "moves": "R' U' R' F R F' U R",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_46_alternative",
+      "pattern_id": "OLL_46",
+      "name": "Alternative",
+      "moves": "y2 L U L F' L' F U' L'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "左手バージョン"
+    },
+    {
+      "id": "OLL_47_standard",
+      "pattern_id": "OLL_47",
+      "name": "Standard",
+      "moves": "F' L' U' L U L' U' L U F",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_47_alternative",
+      "pattern_id": "OLL_47",
+      "name": "Alternative",
+      "moves": "y2 f' U' L' U L U' L' U L f",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "OLL_48_standard",
+      "pattern_id": "OLL_48",
+      "name": "Standard",
+      "moves": "F R U R' U' R U R' U' F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_48_alternative",
+      "pattern_id": "OLL_48",
+      "name": "Alternative",
+      "moves": "y2 f U R U' R' U R U' R' f'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "OLL_49_standard",
+      "pattern_id": "OLL_49",
+      "name": "Standard",
+      "moves": "y2 l U' l2 U l2 U l2 U' l",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_49_alternative",
+      "pattern_id": "OLL_49",
+      "name": "Alternative",
+      "moves": "y2 r U' r2 U r2 U r2 U' r",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "右手wide回転"
+    },
+    {
+      "id": "OLL_50_standard",
+      "pattern_id": "OLL_50",
+      "name": "Standard",
+      "moves": "r' U r2 U' r2 U' r2 U r'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_50_alternative",
+      "pattern_id": "OLL_50",
+      "name": "Alternative",
+      "moves": "y2 l' U l2 U' l2 U' l2 U l'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "左手wide回転"
+    },
+    {
+      "id": "OLL_51_standard",
+      "pattern_id": "OLL_51",
+      "name": "Standard",
+      "moves": "f R U R' U' R U R' U' f'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_51_alternative",
+      "pattern_id": "OLL_51",
+      "name": "Alternative",
+      "moves": "y2 f' L' U' L U L' U' L U f",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "左手バージョン"
+    },
+    {
+      "id": "OLL_52_standard",
+      "pattern_id": "OLL_52",
+      "name": "Standard",
+      "moves": "y2 R' F' U' F U' R U R' U R",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_52_alternative",
+      "pattern_id": "OLL_52",
+      "name": "Alternative",
+      "moves": "R U R' U R U' B U' B' R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "B回転使用"
+    },
+    {
+      "id": "OLL_53_standard",
+      "pattern_id": "OLL_53",
+      "name": "Standard",
+      "moves": "r' U' R U' R' U R U' R' U2 r",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_53_alternative",
+      "pattern_id": "OLL_53",
+      "name": "Alternative",
+      "moves": "y r' U2 R U R' U' R U R' U r",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_54_standard",
+      "pattern_id": "OLL_54",
+      "name": "Standard",
+      "moves": "r U R' U R U' R' U R U2 r'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_54_alternative",
+      "pattern_id": "OLL_54",
+      "name": "Alternative",
+      "moves": "y' r U2 R' U' R U R' U' R U' r'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_55_standard",
+      "pattern_id": "OLL_55",
+      "name": "Standard",
+      "moves": "y R' F R U R U' R2 F' R2 U' R' U R U R'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_55_alternative",
+      "pattern_id": "OLL_55",
+      "name": "Alternative",
+      "moves": "y R' F U R U' R2 F' R2 U R' U' R",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "OLL_56_standard",
+      "pattern_id": "OLL_56",
+      "name": "Standard",
+      "moves": "r U r' U R U' R' U R U' R' r U' r'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "OLL_56_alternative",
+      "pattern_id": "OLL_56",
+      "name": "Alternative",
+      "moves": "r' U' r U' R' U R U' R' U R r' U r",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "ミラー"
+    },
+    {
+      "id": "OLL_57_standard",
+      "pattern_id": "OLL_57",
+      "name": "Standard",
+      "moves": "R U R' U' M' U R U' r'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的（H-shape）"
+    },
+    {
+      "id": "OLL_57_alternative",
+      "pattern_id": "OLL_57",
+      "name": "Alternative",
+      "moves": "y S R' F R S' R' F' R",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "S回転使用"
+    },
+    {
+      "id": "PLL_Aa_standard",
+      "pattern_id": "PLL_Aa",
+      "name": "Standard",
+      "moves": "x R' U R' D2 R U' R' D2 R2 x'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Aa_alternative_1",
+      "pattern_id": "PLL_Aa",
+      "name": "Alternative 1",
+      "moves": "y x' R2 D2 R' U' R D2 R' U R' x",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "x回転のバリエーション"
+    },
+    {
+      "id": "PLL_Aa_alternative_2",
+      "pattern_id": "PLL_Aa",
+      "name": "Alternative 2",
+      "moves": "y2 x' L' U L' D2 L U' L' D2 L2 x",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "左手バージョン"
+    },
+    {
+      "id": "PLL_Aa_alternative_3",
+      "pattern_id": "PLL_Aa",
+      "name": "Alternative 3",
+      "moves": "y' x L2 D2 L' U' L D2 L' U L' x'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別の向き"
+    },
+    {
+      "id": "PLL_Aa_ruf",
+      "pattern_id": "PLL_Aa",
+      "name": "RUF",
+      "moves": "y' R U R' F' r U R' U' r' F R2 U' R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "R、U、Fのみ使用"
+    },
+    {
+      "id": "PLL_Ab_standard",
+      "pattern_id": "PLL_Ab",
+      "name": "Standard",
+      "moves": "x R2 D2 R U R' D2 R U' R x'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Ab_alternative_1",
+      "pattern_id": "PLL_Ab",
+      "name": "Alternative 1",
+      "moves": "y x' R U' R D2 R' U R D2 R2 x",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "x回転のバリエーション"
+    },
+    {
+      "id": "PLL_Ab_alternative_2",
+      "pattern_id": "PLL_Ab",
+      "name": "Alternative 2",
+      "moves": "y' x L U' L D2 L' U L D2 L2 x'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "左手バージョン"
+    },
+    {
+      "id": "PLL_Ab_alternative_3",
+      "pattern_id": "PLL_Ab",
+      "name": "Alternative 3",
+      "moves": "y2 x' L2 D2 L U L' D2 L U' L x",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別の向き"
+    },
+    {
+      "id": "PLL_E_standard",
+      "pattern_id": "PLL_E",
+      "name": "Standard",
+      "moves": "x' (R U' R' D R U R' D')(R U R' D R U' R' D') x",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_E_alternative",
+      "pattern_id": "PLL_E",
+      "name": "Alternative",
+      "moves": "y R' U' R' D' R U' R' D R U R' D' R U R' D R2",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "D回転を使用"
+    },
+    {
+      "id": "PLL_F_standard",
+      "pattern_id": "PLL_F",
+      "name": "Standard",
+      "moves": "R' U' F'(R U R' U' R' F R2 U' R' U' R U R')U R",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_F_alternative_1",
+      "pattern_id": "PLL_F",
+      "name": "Alternative 1",
+      "moves": "R' U R U' R2 F' U' F U R F R' F' R2",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "PLL_Ga_standard",
+      "pattern_id": "PLL_Ga",
+      "name": "Standard",
+      "moves": "R2 U R' U R' U' R U' R2 D U' R' U R D'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Ga_alternative",
+      "pattern_id": "PLL_Ga",
+      "name": "Alternative",
+      "moves": "R2 u R' U R' U' R u' R2 F' U F",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "PLL_Gb_standard",
+      "pattern_id": "PLL_Gb",
+      "name": "Standard",
+      "moves": "R' U' R U D' R2 U R' U R U' R U' R2 D",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Gb_alternative",
+      "pattern_id": "PLL_Gb",
+      "name": "Alternative",
+      "moves": "R' U' R y R2 u R' U R U' R u' R2",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "PLL_Gc_standard",
+      "pattern_id": "PLL_Gc",
+      "name": "Standard",
+      "moves": "R2 U' R U' R U R' U R2 D' U R U' R' D",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Gc_alternative",
+      "pattern_id": "PLL_Gc",
+      "name": "Alternative",
+      "moves": "R2 u' R U' R U R' u R2 y R U' R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "PLL_Gd_standard",
+      "pattern_id": "PLL_Gd",
+      "name": "Standard",
+      "moves": "R U R' U' D R2 U' R U' R' U R' U R2 D'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Gd_alternative",
+      "pattern_id": "PLL_Gd",
+      "name": "Alternative",
+      "moves": "R U R' y' R2 u' R U' R' U R' u R2",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "PLL_H_standard",
+      "pattern_id": "PLL_H",
+      "name": "Standard",
+      "moves": "M2 U M2 U2 M2 U M2",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的"
+    },
+    {
+      "id": "PLL_H_alternative",
+      "pattern_id": "PLL_H",
+      "name": "Alternative",
+      "moves": "R2 U2 R U2 R2 U2 R2 U2 R U2 R2",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "M回転を使わないバージョン"
+    },
+    {
+      "id": "PLL_Ja_standard",
+      "pattern_id": "PLL_Ja",
+      "name": "Standard",
+      "moves": "y2 x R2 F R F' R U2 r' U r U2 x'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Ja_alternative_1",
+      "pattern_id": "PLL_Ja",
+      "name": "Alternative 1",
+      "moves": "y2 r R2 F R F' R U2 r' U r U2 r'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "PLL_Ja_alternative_2",
+      "pattern_id": "PLL_Ja",
+      "name": "Alternative 2",
+      "moves": "y R' U L' U2 R U' R' U2 R L",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "L回転を含む"
+    },
+    {
+      "id": "PLL_Ja_alternative_3",
+      "pattern_id": "PLL_Ja",
+      "name": "Alternative 3",
+      "moves": "l'(R' F R F')R U2 r' U r U2 x'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "L回転を含む"
+    },
+    {
+      "id": "PLL_Jb_standard",
+      "pattern_id": "PLL_Jb",
+      "name": "Standard",
+      "moves": "R U R' F' R U R' U' R' F R2 U' R'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Jb_alternative_1",
+      "pattern_id": "PLL_Jb",
+      "name": "Alternative 1",
+      "moves": "r' D r U2 r' D' r U r' D r U r' D' r",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "D回転使用"
+    },
+    {
+      "id": "PLL_Jb_alternative_2",
+      "pattern_id": "PLL_Jb",
+      "name": "Alternative 2",
+      "moves": "R U2 R' U' R U2 L' U R' U' L",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "L回転を含む"
+    },
+    {
+      "id": "PLL_Na_standard",
+      "pattern_id": "PLL_Na",
+      "name": "Standard",
+      "moves": "R U R' U(R U R' F' R U R' U' R' F R2 U' R')U2 R U' R'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Na_alternative",
+      "pattern_id": "PLL_Na",
+      "name": "Alternative",
+      "moves": "F' R U R' U' R' F R2 F U' R' U' R U F' R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "PLL_Nb_standard",
+      "pattern_id": "PLL_Nb",
+      "name": "Standard",
+      "moves": "R' U R U' R' F' U' F R U R' F R' F' R U' R",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Nb_alternative_1",
+      "pattern_id": "PLL_Nb",
+      "name": "Alternative 1",
+      "moves": "R' U R' F R F' R U' R' F' U F R U R' U' R",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "PLL_Nb_alternative_2",
+      "pattern_id": "PLL_Nb",
+      "name": "Alternative 2",
+      "moves": "(r D r' U2)(r D' r' U2)(r D r' U2)(r D r' U2)r D r'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "PLL_Ra_standard",
+      "pattern_id": "PLL_Ra",
+      "name": "Standard",
+      "moves": "y R U' R' U' R U R D R' U' R D' R' U2 R'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Ra_alternative_1",
+      "pattern_id": "PLL_Ra",
+      "name": "Alternative 1",
+      "moves": "y R U R' F' R U2 R' U2 R' F R U R U2 R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "F回転使用"
+    },
+    {
+      "id": "PLL_Ra_alternative_2",
+      "pattern_id": "PLL_Ra",
+      "name": "Alternative 2",
+      "moves": "y2 R U' R2 D' R U R' D R U' R U' R' U R U R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "D回転使用"
+    },
+    {
+      "id": "PLL_Ra_alternative_3",
+      "pattern_id": "PLL_Ra",
+      "name": "Alternative 3",
+      "moves": "(R U R' F')R U2 R' U2 (R' F R) U R U2 R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "動画で紹介されたバージョン"
+    },
+    {
+      "id": "PLL_Rb_standard",
+      "pattern_id": "PLL_Rb",
+      "name": "Standard",
+      "moves": "R' U2 R U2 R' F(R U R' U')R' F' R2",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Rb_alternative_1",
+      "pattern_id": "PLL_Rb",
+      "name": "Alternative 1",
+      "moves": "y R2 F R U R U' R' F' R U2 R' U2 R",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "PLL_Rb_alternative_2",
+      "pattern_id": "PLL_Rb",
+      "name": "Alternative 2",
+      "moves": "y R' U2 R' D' R U' R' D R U R U' R' U' R",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "D回転使用"
+    },
+    {
+      "id": "PLL_T_standard",
+      "pattern_id": "PLL_T",
+      "name": "Standard",
+      "moves": "R U R' U'(R' F R2)U' R' U'(R U R' F')",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_T_alternative",
+      "pattern_id": "PLL_T",
+      "name": "Alternative",
+      "moves": "R U R' U' R' F R2 U' R' U F' L' U L",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "L回転を含む"
+    },
+    {
+      "id": "PLL_Ua_standard",
+      "pattern_id": "PLL_Ua",
+      "name": "Standard",
+      "moves": "R2 U' R' U' R U R U R U' R",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Ua_alternative_1",
+      "pattern_id": "PLL_Ua",
+      "name": "Alternative 1",
+      "moves": "y2 R U' R U R U R U' R' U' R2",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別の向き"
+    },
+    {
+      "id": "PLL_Ua_alternative_2",
+      "pattern_id": "PLL_Ua",
+      "name": "Alternative 2",
+      "moves": "M2 U M' U2 M U M2",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "M回転を使用するバージョン"
+    },
+    {
+      "id": "PLL_Ua_rud",
+      "pattern_id": "PLL_Ua",
+      "name": "RUD",
+      "moves": "y2 M2 U M U2 M' U M2",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "M回転バリエーション"
+    },
+    {
+      "id": "PLL_Ub_standard",
+      "pattern_id": "PLL_Ub",
+      "name": "Standard",
+      "moves": "R' U R' U' R' U' R' U R U R2",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "最も一般的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Ub_alternative_1",
+      "pattern_id": "PLL_Ub",
+      "name": "Alternative 1",
+      "moves": "R' U R' U' R' U' R' U R U R2",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "PLL_Ub_alternative_2",
+      "pattern_id": "PLL_Ub",
+      "name": "Alternative 2",
+      "moves": "y2 R2 U R U R' U' R' U' R' U R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別の向き"
+    },
+    {
+      "id": "PLL_Ub_m_slice",
+      "pattern_id": "PLL_Ub",
+      "name": "M-slice",
+      "moves": "M2 U' M' U2 M U' M2",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "M回転を使用"
+    },
+    {
+      "id": "PLL_V_standard",
+      "pattern_id": "PLL_V",
+      "name": "Standard",
+      "moves": "R' U R' U' y R' F' R2 U' R' U R' F R F",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_V_alternative_1",
+      "pattern_id": "PLL_V",
+      "name": "Alternative 1",
+      "moves": "R' U R' d' R' F' R2 U' R' U R' F R F",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "d回転使用"
+    },
+    {
+      "id": "PLL_V_alternative_2",
+      "pattern_id": "PLL_V",
+      "name": "Alternative 2",
+      "moves": "R' U R U' R' f' U' R U2 R' U' R U' R' f R",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "wide回転使用"
+    },
+    {
+      "id": "PLL_Y_standard",
+      "pattern_id": "PLL_Y",
+      "name": "Standard",
+      "moves": "F R U' R' U' R U R' F' R U R' U' R' F R F'",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Y_alternative_1",
+      "pattern_id": "PLL_Y",
+      "name": "Alternative 1",
+      "moves": "F R' F R2 U' R' U' R U R' F' R U R' U' F'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別パターン"
+    },
+    {
+      "id": "PLL_Z_standard",
+      "pattern_id": "PLL_Z",
+      "name": "Standard",
+      "moves": "M2 U M2 U M U2 M2 U2 M",
+      "finger_tricks": "",
+      "is_default": true,
+      "notes": "標準的なアルゴリズム"
+    },
+    {
+      "id": "PLL_Z_alternative_1",
+      "pattern_id": "PLL_Z",
+      "name": "Alternative 1",
+      "moves": "y M2 U' M2 U' M' U2 M2 U2 M'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "別の向き"
+    },
+    {
+      "id": "PLL_Z_alternative_2",
+      "pattern_id": "PLL_Z",
+      "name": "Alternative 2",
+      "moves": "y R' U' R2 U R U R' U' R U R U' R U' R'",
+      "finger_tricks": "",
+      "is_default": false,
+      "notes": "M回転を使わないバージョン"
+    }
+  ]
+}

@@ -8,6 +8,7 @@ from .constants import SoundConfig as SC
 from .renderer import SpeedcubeRenderer
 from .states import TimerState
 from .state_handlers import StateHandlerManager
+from .patterns import PatternDatabase
 
 
 class SpeedcubeApp:
@@ -26,6 +27,23 @@ class SpeedcubeApp:
         # コンポーネントの初期化
         self.logger = SpeedcubeLogger()
         self.stats = SpeedcubeStats(self.logger)  # ロガーを渡す
+        
+        # パターンデータベースの初期化（Phase 2）
+        self.pattern_db = PatternDatabase()
+        self.selected_pattern_index = 0
+        self.selected_algorithm_index = 0
+        self.pattern_list_scroll_offset = 0  # パターン一覧のスクロールオフセット
+        self.selected_category_tab = 0  # カテゴリタブのインデックス（0: RAND, 1: PLL, 2: OLL）
+        self.current_pattern = None
+        self.current_algorithm = None
+        self.available_algorithms = []
+        self.pattern_result_time = 0.0
+        self.pending_rating = 0
+        
+        # ランダムモード用変数（Phase 3）
+        self.random_mode = False  # ランダムモード実行中フラグ
+        self.random_category = "ALL"  # ランダム選択カテゴリ（"OLL", "PLL", "ALL"）
+        self.recent_random_patterns = []  # 直近のランダムパターンID履歴（最大5件）
 
         # 状態の初期化
         self.bg_color = DC.DEFAULT_BACKGROUND_COLOR
@@ -55,12 +73,7 @@ class SpeedcubeApp:
         pyxel.run(self.update, self.draw)
 
     def update(self):
-        """状態に応じた更新処理を実行"""        # ESCキーで終了
-        if pyxel.btnp(pyxel.KEY_ESCAPE):
-            result = self.logger.sync_data()
-            print(result[1])
-            pyxel.quit()
-
+        """状態に応じた更新処理を実行"""
         if pyxel.btnp(pyxel.KEY_C):
             pyxel.play(SC.BEEP_CHANNEL, SC.CHANGE_SOUND)
             self.bg_color = (self.bg_color + 1) % 16
@@ -68,6 +81,12 @@ class SpeedcubeApp:
 
         # 状態ハンドラマネージャーを使用して状態更新を委譲
         self.state_handler_manager.update()
+        
+        # Qキーでアプリケーション終了（READY状態のときのみ）
+        if pyxel.btnp(pyxel.KEY_Q) and self.state == TimerState.READY:
+            result = self.logger.sync_data()
+            print(result[1])
+            pyxel.quit()
             
     def draw(self):
         """描画処理を実行"""

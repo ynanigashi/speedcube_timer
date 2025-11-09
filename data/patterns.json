@@ -1,0 +1,628 @@
+{
+  "patterns": [
+    {
+      "id": "OLL_01",
+      "name": "OLL #1",
+      "category": "OLL",
+      "setup_moves": "R U2 R2 F R F' U2 R' F R F'",
+      "description": "Pure dot (all edges flipped)",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_02",
+      "name": "OLL #2",
+      "category": "OLL",
+      "setup_moves": "F R U R' U' F' f R U R' U' f'",
+      "description": "Pure dot (all edges flipped, different case)",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_03",
+      "name": "OLL #3",
+      "category": "OLL",
+      "setup_moves": "f R U R' U' f' U' F R U R' U' F'",
+      "description": "Dot + 1 oriented (Small L-shape)",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_04",
+      "name": "OLL #4",
+      "category": "OLL",
+      "setup_moves": "f R U R' U' f' U F R U R' U' F'",
+      "description": "Dot + 1 oriented (Small L-shape mirror)",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_05",
+      "name": "OLL #5",
+      "category": "OLL",
+      "setup_moves": "l' U' L U' L' U2 l",
+      "description": "Square shape",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_06",
+      "name": "OLL #6",
+      "category": "OLL",
+      "setup_moves": "r U R' U R U2 r'",
+      "description": "Square shape (Fat anti-sune)",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_07",
+      "name": "OLL #7",
+      "category": "OLL",
+      "setup_moves": "r U R' U R U2 r'",
+      "description": "Lightning bolt (Fat sune)",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_08",
+      "name": "OLL #8",
+      "category": "OLL",
+      "setup_moves": "r' U' R U' R' U2 r",
+      "description": "Lightning bolt",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_09",
+      "name": "OLL #9",
+      "category": "OLL",
+      "setup_moves": "R U R' U' R' F R2 U R' U' F'",
+      "description": "Y-shape",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_10",
+      "name": "OLL #10",
+      "category": "OLL",
+      "setup_moves": "R U R' U R' F R F' R U2 R'",
+      "description": "Y-shape (mirror)",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_11",
+      "name": "OLL #11",
+      "category": "OLL",
+      "setup_moves": "r' R2 U R' U R U2 R' U M'",
+      "description": "Lightning bolt variant",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_12",
+      "name": "OLL #12",
+      "category": "OLL",
+      "setup_moves": "F R U R' U' F' U F R U R' U' F'",
+      "description": "Lightning bolt variant",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_13",
+      "name": "OLL #13",
+      "category": "OLL",
+      "setup_moves": "F U R U' R2 F' R U R U' R'",
+      "description": "L-shape",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_14",
+      "name": "OLL #14",
+      "category": "OLL",
+      "setup_moves": "R' F R U R' F' R F U' F'",
+      "description": "L-shape (mirror)",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_15",
+      "name": "OLL #15",
+      "category": "OLL",
+      "setup_moves": "r' U' r R' U' R U r' U r",
+      "description": "L-shape variant",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_16",
+      "name": "OLL #16",
+      "category": "OLL",
+      "setup_moves": "r U r' R U R' U' r U' r'",
+      "description": "L-shape variant (mirror)",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_17",
+      "name": "OLL #17",
+      "category": "OLL",
+      "setup_moves": "R U R' U R' F R F' U2 R' F R F'",
+      "description": "Diagonal dot",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_18",
+      "name": "OLL #18",
+      "category": "OLL",
+      "setup_moves": "R U2 R2 F R F' U2 M' U R U' r'",
+      "description": "V-shape dot",
+      "difficulty": 4
+    },
+    {
+      "id": "OLL_19",
+      "name": "OLL #19",
+      "category": "OLL",
+      "setup_moves": "r' R U R U R' U' r R2 F R F'",
+      "description": "V-shape dot (mirror)",
+      "difficulty": 4
+    },
+    {
+      "id": "OLL_20",
+      "name": "OLL #20",
+      "category": "OLL",
+      "setup_moves": "r' R U R U R' U' M2 U R U' r'",
+      "description": "X-shape dot",
+      "difficulty": 4
+    },
+    {
+      "id": "OLL_21",
+      "name": "OLL #21",
+      "category": "OLL",
+      "setup_moves": "R U2 R' U' R U R' U' R U' R'",
+      "description": "Cross H (Anti-sune)",
+      "difficulty": 1
+    },
+    {
+      "id": "OLL_22",
+      "name": "OLL #22",
+      "category": "OLL",
+      "setup_moves": "R U2 R2 U' R2 U' R2 U2 R",
+      "description": "Cross π",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_23",
+      "name": "OLL #23",
+      "category": "OLL",
+      "setup_moves": "R2 D' R U2 R' D R U2 R",
+      "description": "Cross U",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_24",
+      "name": "OLL #24",
+      "category": "OLL",
+      "setup_moves": "r U R' U' r' F R F'",
+      "description": "Cross T",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_25",
+      "name": "OLL #25",
+      "category": "OLL",
+      "setup_moves": "F' r U R' U' r' F R",
+      "description": "Cross L",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_26",
+      "name": "OLL #26",
+      "category": "OLL",
+      "setup_moves": "R U2 R' U' R U' R'",
+      "description": "Anti-sune",
+      "difficulty": 1
+    },
+    {
+      "id": "OLL_27",
+      "name": "OLL #27",
+      "category": "OLL",
+      "setup_moves": "R U R' U R U2 R'",
+      "description": "Sune",
+      "difficulty": 1
+    },
+    {
+      "id": "OLL_28",
+      "name": "OLL #28",
+      "category": "OLL",
+      "setup_moves": "r U R' U' M U R U' R'",
+      "description": "Arrow (↑) shape",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_29",
+      "name": "OLL #29",
+      "category": "OLL",
+      "setup_moves": "R U R' U' R U' R' F' U' F R U R'",
+      "description": "Lightning bolt + 1",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_30",
+      "name": "OLL #30",
+      "category": "OLL",
+      "setup_moves": "F U R U2 R' U' R U2 R' U' F'",
+      "description": "Lightning bolt + 1 (mirror)",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_31",
+      "name": "OLL #31",
+      "category": "OLL",
+      "setup_moves": "R' U' F U R U' R' F' R",
+      "description": "P-shape (9-shape)",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_32",
+      "name": "OLL #32",
+      "category": "OLL",
+      "setup_moves": "R U B' U' R' U R B R'",
+      "description": "P-shape",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_33",
+      "name": "OLL #33",
+      "category": "OLL",
+      "setup_moves": "R U R' U' R' F R F'",
+      "description": "T-shape",
+      "difficulty": 1
+    },
+    {
+      "id": "OLL_34",
+      "name": "OLL #34",
+      "category": "OLL",
+      "setup_moves": "R U R2 U' R' F R U R U' F'",
+      "description": "C-shape",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_35",
+      "name": "OLL #35",
+      "category": "OLL",
+      "setup_moves": "R U2 R2 F R F' R U2 R'",
+      "description": "Fish shape",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_36",
+      "name": "OLL #36",
+      "category": "OLL",
+      "setup_moves": "L' U' L U' L' U L U L F' L' F",
+      "description": "W-shape",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_37",
+      "name": "OLL #37",
+      "category": "OLL",
+      "setup_moves": "F R U' R' U' R U R' F'",
+      "description": "Fish shape (mirror)",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_38",
+      "name": "OLL #38",
+      "category": "OLL",
+      "setup_moves": "R U R' U R U' R' U' R' F R F'",
+      "description": "W-shape (mirror)",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_39",
+      "name": "OLL #39",
+      "category": "OLL",
+      "setup_moves": "L F' L' U' L U F U' L'",
+      "description": "Z-shape",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_40",
+      "name": "OLL #40",
+      "category": "OLL",
+      "setup_moves": "R' F R U R' U' F' U R",
+      "description": "S-shape",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_41",
+      "name": "OLL #41",
+      "category": "OLL",
+      "setup_moves": "R U R' U R U2 R' F R U R' U' F'",
+      "description": "Lightning bolt + 1",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_42",
+      "name": "OLL #42",
+      "category": "OLL",
+      "setup_moves": "R' U' R U' R' U2 R F R U R' U' F'",
+      "description": "Lightning bolt + 1 (mirror)",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_43",
+      "name": "OLL #43",
+      "category": "OLL",
+      "setup_moves": "R' U' F' U F R",
+      "description": "P-shape (9-shape) variant",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_44",
+      "name": "OLL #44",
+      "category": "OLL",
+      "setup_moves": "f R U R' U' f'",
+      "description": "P-shape variant",
+      "difficulty": 1
+    },
+    {
+      "id": "OLL_45",
+      "name": "OLL #45",
+      "category": "OLL",
+      "setup_moves": "F R U R' U' F'",
+      "description": "T-shape variant",
+      "difficulty": 1
+    },
+    {
+      "id": "OLL_46",
+      "name": "OLL #46",
+      "category": "OLL",
+      "setup_moves": "R' U' R' F R F' U R",
+      "description": "C-shape variant",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_47",
+      "name": "OLL #47",
+      "category": "OLL",
+      "setup_moves": "F' L' U' L U L' U' L U F",
+      "description": "Small L-shape",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_48",
+      "name": "OLL #48",
+      "category": "OLL",
+      "setup_moves": "F R U R' U' R U R' U' F'",
+      "description": "Small L-shape (mirror)",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_49",
+      "name": "OLL #49",
+      "category": "OLL",
+      "setup_moves": "r U' r2 U r2 U r2 U' r",
+      "description": "Small L-shape variant",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_50",
+      "name": "OLL #50",
+      "category": "OLL",
+      "setup_moves": "r' U r2 U' r2 U' r2 U r'",
+      "description": "Small L-shape variant (mirror)",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_51",
+      "name": "OLL #51",
+      "category": "OLL",
+      "setup_moves": "f R U R' U' R U R' U' f'",
+      "description": "I-shape",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_52",
+      "name": "OLL #52",
+      "category": "OLL",
+      "setup_moves": "R' F' U' F U' R U R' U R",
+      "description": "I-shape (mirror)",
+      "difficulty": 2
+    },
+    {
+      "id": "OLL_53",
+      "name": "OLL #53",
+      "category": "OLL",
+      "setup_moves": "r' U' R U' R' U R U' R' U2 r",
+      "description": "Small L-shape complex",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_54",
+      "name": "OLL #54",
+      "category": "OLL",
+      "setup_moves": "r U R' U R U' R' U R U2 r'",
+      "description": "Small L-shape complex (mirror)",
+      "difficulty": 3
+    },
+    {
+      "id": "OLL_55",
+      "name": "OLL #55",
+      "category": "OLL",
+      "setup_moves": "R' F R U R U' R2 F' R2 U' R' U R U R'",
+      "description": "I-shape complex",
+      "difficulty": 4
+    },
+    {
+      "id": "OLL_56",
+      "name": "OLL #56",
+      "category": "OLL",
+      "setup_moves": "r U r' U R U' R' U R U' R' r U' r'",
+      "description": "I-shape complex (mirror)",
+      "difficulty": 4
+    },
+    {
+      "id": "OLL_57",
+      "name": "OLL #57",
+      "category": "OLL",
+      "setup_moves": "R U R' U' M' U R U' r'",
+      "description": "H-shape",
+      "difficulty": 2
+    },
+    {
+      "id": "PLL_Aa",
+      "name": "PLL Aa",
+      "category": "PLL",
+      "setup_moves": "x R' U R' D2 R U' R' D2 R2 x'",
+      "description": "Adjacent corners swap (clockwise)",
+      "difficulty": 2
+    },
+    {
+      "id": "PLL_Ab",
+      "name": "PLL Ab",
+      "category": "PLL",
+      "setup_moves": "x R2 D2 R U R' D2 R U' R x'",
+      "description": "Adjacent corners swap (counter-clockwise)",
+      "difficulty": 2
+    },
+    {
+      "id": "PLL_E",
+      "name": "PLL E",
+      "category": "PLL",
+      "setup_moves": "x' R U' R' D R U R' D' R U R' D R U' R' D' x",
+      "description": "Both pairs swap",
+      "difficulty": 3
+    },
+    {
+      "id": "PLL_F",
+      "name": "PLL F",
+      "category": "PLL",
+      "setup_moves": "R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R",
+      "description": "Adjacent corners + adjacent edges",
+      "difficulty": 3
+    },
+    {
+      "id": "PLL_Ga",
+      "name": "PLL Ga",
+      "category": "PLL",
+      "setup_moves": "R2 U R' U R' U' R U' R2 D U' R' U R D'",
+      "description": "Adjacent corners + 3 edges (clockwise)",
+      "difficulty": 3
+    },
+    {
+      "id": "PLL_Gb",
+      "name": "PLL Gb",
+      "category": "PLL",
+      "setup_moves": "R' U' R U D' R2 U R' U R U' R U' R2 D",
+      "description": "Adjacent corners + 3 edges (counter-clockwise)",
+      "difficulty": 3
+    },
+    {
+      "id": "PLL_Gc",
+      "name": "PLL Gc",
+      "category": "PLL",
+      "setup_moves": "R2 U' R U' R U R' U R2 D' U R U' R' D",
+      "description": "Adjacent corners + 3 edges (variant 1)",
+      "difficulty": 3
+    },
+    {
+      "id": "PLL_Gd",
+      "name": "PLL Gd",
+      "category": "PLL",
+      "setup_moves": "R U R' U' D R2 U' R U' R' U R' U R2 D'",
+      "description": "Adjacent corners + 3 edges (variant 2)",
+      "difficulty": 3
+    },
+    {
+      "id": "PLL_H",
+      "name": "PLL H",
+      "category": "PLL",
+      "setup_moves": "M2 U M2 U2 M2 U M2",
+      "description": "Opposite edges swap (2 pairs)",
+      "difficulty": 2
+    },
+    {
+      "id": "PLL_Ja",
+      "name": "PLL Ja",
+      "category": "PLL",
+      "setup_moves": "x R2 F R F' R U2 r' U r U2 x'",
+      "description": "Adjacent corners + 2 adjacent edges",
+      "difficulty": 2
+    },
+    {
+      "id": "PLL_Jb",
+      "name": "PLL Jb",
+      "category": "PLL",
+      "setup_moves": "R U R' F' R U R' U' R' F R2 U' R'",
+      "description": "Adjacent corners + 2 adjacent edges (mirror)",
+      "difficulty": 2
+    },
+    {
+      "id": "PLL_Na",
+      "name": "PLL Na",
+      "category": "PLL",
+      "setup_moves": "R U R' U R U R' F' R U R' U' R' F R2 U' R' U2 R U' R'",
+      "description": "Diagonal corners + 3 edges (clockwise)",
+      "difficulty": 4
+    },
+    {
+      "id": "PLL_Nb",
+      "name": "PLL Nb",
+      "category": "PLL",
+      "setup_moves": "R' U R U' R' F' U' F R U R' F R' F' R U' R",
+      "description": "Diagonal corners + 3 edges (counter-clockwise)",
+      "difficulty": 4
+    },
+    {
+      "id": "PLL_Ra",
+      "name": "PLL Ra",
+      "category": "PLL",
+      "setup_moves": "R U' R' U' R U R D R' U' R D' R' U2 R'",
+      "description": "Opposite corners + 3 edges (clockwise)",
+      "difficulty": 3
+    },
+    {
+      "id": "PLL_Rb",
+      "name": "PLL Rb",
+      "category": "PLL",
+      "setup_moves": "R' U2 R U2 R' F R U R' U' R' F' R2",
+      "description": "Opposite corners + 3 edges (counter-clockwise)",
+      "difficulty": 3
+    },
+    {
+      "id": "PLL_T",
+      "name": "PLL T",
+      "category": "PLL",
+      "setup_moves": "R U R' U' R' F R2 U' R' U' R U R' F'",
+      "description": "Adjacent corners + opposite edges",
+      "difficulty": 2
+    },
+    {
+      "id": "PLL_Ua",
+      "name": "PLL Ua",
+      "category": "PLL",
+      "setup_moves": "R2 U' R' U' R U R U R U' R",
+      "description": "3 edges clockwise",
+      "difficulty": 1
+    },
+    {
+      "id": "PLL_Ub",
+      "name": "PLL Ub",
+      "category": "PLL",
+      "setup_moves": "R' U R' U' R' U' R' U R U R2",
+      "description": "3 edges counter-clockwise",
+      "difficulty": 1
+    },
+    {
+      "id": "PLL_V",
+      "name": "PLL V",
+      "category": "PLL",
+      "setup_moves": "R' U R' U' y R' F' R2 U' R' U R' F R F",
+      "description": "Diagonal corners + 2 adjacent edges",
+      "difficulty": 3
+    },
+    {
+      "id": "PLL_Y",
+      "name": "PLL Y",
+      "category": "PLL",
+      "setup_moves": "F R U' R' U' R U R' F' R U R' U' R' F R F'",
+      "description": "Diagonal corners + opposite edges",
+      "difficulty": 3
+    },
+    {
+      "id": "PLL_Z",
+      "name": "PLL Z",
+      "category": "PLL",
+      "setup_moves": "M2 U M2 U M' U2 M2 U2 M'",
+      "description": "Opposite edges swap (diagonal)",
+      "difficulty": 2
+    }
+  ]
+}

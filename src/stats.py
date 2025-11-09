@@ -240,3 +240,297 @@ class SpeedcubeStats:
             float: 現在の月の平均ソルブ時間、データがない場合はNone
         """
         return self.get_monthly_average_time()
+    
+    # ========================================
+    # パターン習得モード用の統計メソッド（Phase 1）
+    # ========================================
+    
+    def get_pattern_times(self, pattern_id, limit=None):
+        """
+        特定パターンの全タイムを取得
+        
+        Args:
+            pattern_id: パターンID
+            limit: 取得する最大件数（Noneの場合は全件）
+            
+        Returns:
+            list: タイムのリスト（新しい順）
+        """
+        if not self.logger:
+            return []
+        
+        try:
+            cursor = self.logger.cursor
+            if limit:
+                cursor.execute(
+                    "SELECT solve_time FROM pattern_solves WHERE pattern_id = ? ORDER BY timestamp DESC LIMIT ?",
+                    (pattern_id, limit)
+                )
+            else:
+                cursor.execute(
+                    "SELECT solve_time FROM pattern_solves WHERE pattern_id = ? ORDER BY timestamp DESC",
+                    (pattern_id,)
+                )
+            
+            results = cursor.fetchall()
+            return [row[0] for row in results]
+        except Exception as e:
+            print(f"DEBUG: get_pattern_times error: {e}")
+            return []
+    
+    def get_pattern_best(self, pattern_id):
+        """
+        特定パターンのベストタイムを取得
+        
+        Args:
+            pattern_id: パターンID
+            
+        Returns:
+            float: ベストタイム、データがない場合はNone
+        """
+        if not self.logger:
+            return None
+        
+        try:
+            cursor = self.logger.cursor
+            cursor.execute(
+                "SELECT MIN(solve_time) FROM pattern_solves WHERE pattern_id = ?",
+                (pattern_id,)
+            )
+            result = cursor.fetchone()
+            return result[0] if result and result[0] is not None else None
+        except Exception as e:
+            print(f"DEBUG: get_pattern_best error: {e}")
+            return None
+    
+    def get_pattern_count(self, pattern_id):
+        """
+        特定パターンの試技回数を取得
+        
+        Args:
+            pattern_id: パターンID
+            
+        Returns:
+            int: 試技回数
+        """
+        if not self.logger:
+            return 0
+        
+        try:
+            cursor = self.logger.cursor
+            cursor.execute(
+                "SELECT COUNT(*) FROM pattern_solves WHERE pattern_id = ?",
+                (pattern_id,)
+            )
+            result = cursor.fetchone()
+            return result[0] if result else 0
+        except Exception as e:
+            print(f"DEBUG: get_pattern_count error: {e}")
+            return 0
+    
+    # ========================================
+    # アルゴリズム別統計メソッド
+    # ========================================
+    
+    def get_algorithm_times(self, algorithm_id, limit=None):
+        """
+        特定アルゴリズムの全タイムを取得
+        
+        Args:
+            algorithm_id: アルゴリズムID
+            limit: 取得する最大件数
+            
+        Returns:
+            list: タイムのリスト（新しい順）
+        """
+        if not self.logger:
+            return []
+        
+        try:
+            cursor = self.logger.cursor
+            if limit:
+                cursor.execute(
+                    "SELECT solve_time FROM pattern_solves WHERE algorithm_id = ? ORDER BY timestamp DESC LIMIT ?",
+                    (algorithm_id, limit)
+                )
+            else:
+                cursor.execute(
+                    "SELECT solve_time FROM pattern_solves WHERE algorithm_id = ? ORDER BY timestamp DESC",
+                    (algorithm_id,)
+                )
+            
+            results = cursor.fetchall()
+            return [row[0] for row in results]
+        except Exception as e:
+            print(f"DEBUG: get_algorithm_times error: {e}")
+            return []
+    
+    def get_algorithm_best(self, algorithm_id):
+        """
+        特定アルゴリズムのベストタイムを取得
+        
+        Args:
+            algorithm_id: アルゴリズムID
+            
+        Returns:
+            float: ベストタイム、データがない場合はNone
+        """
+        if not self.logger:
+            return None
+        
+        try:
+            cursor = self.logger.cursor
+            cursor.execute(
+                "SELECT MIN(solve_time) FROM pattern_solves WHERE algorithm_id = ?",
+                (algorithm_id,)
+            )
+            result = cursor.fetchone()
+            return result[0] if result and result[0] is not None else None
+        except Exception as e:
+            print(f"DEBUG: get_algorithm_best error: {e}")
+            return None
+    
+    def get_algorithm_count(self, algorithm_id):
+        """
+        特定アルゴリズムの試技回数を取得
+        
+        Args:
+            algorithm_id: アルゴリズムID
+            
+        Returns:
+            int: 試技回数
+        """
+        if not self.logger:
+            return 0
+        
+        try:
+            cursor = self.logger.cursor
+            cursor.execute(
+                "SELECT COUNT(*) FROM pattern_solves WHERE algorithm_id = ?",
+                (algorithm_id,)
+            )
+            result = cursor.fetchone()
+            return result[0] if result else 0
+        except Exception as e:
+            print(f"DEBUG: get_algorithm_count error: {e}")
+            return 0
+    
+    # ========================================
+    # ユーザー設定管理メソッド（Phase 2）
+    # ========================================
+    
+    def get_user_selected_algorithm(self, pattern_id):
+        """
+        ユーザーが選択したアルゴリズムIDを取得
+        
+        Args:
+            pattern_id: パターンID
+            
+        Returns:
+            str: アルゴリズムID、設定がない場合はNone
+        """
+        if not self.logger:
+            return None
+        
+        try:
+            cursor = self.logger.cursor
+            cursor.execute(
+                "SELECT selected_algorithm_id FROM user_pattern_preferences WHERE pattern_id = ?",
+                (pattern_id,)
+            )
+            result = cursor.fetchone()
+            return result[0] if result else None
+        except Exception as e:
+            print(f"DEBUG: get_user_selected_algorithm error: {e}")
+            return None
+    
+    def set_user_selected_algorithm(self, pattern_id, algorithm_id):
+        """
+        ユーザーのアルゴリズム選択を保存
+        
+        Args:
+            pattern_id: パターンID
+            algorithm_id: アルゴリズムID
+            
+        Returns:
+            bool: 成功した場合True
+        """
+        if not self.logger:
+            return False
+        
+        try:
+            cursor = self.logger.cursor
+            cursor.execute(
+                """
+                INSERT OR REPLACE INTO user_pattern_preferences 
+                (pattern_id, selected_algorithm_id, last_updated)
+                VALUES (?, ?, CURRENT_TIMESTAMP)
+                """,
+                (pattern_id, algorithm_id)
+            )
+            self.logger.conn.commit()
+            return True
+        except Exception as e:
+            print(f"DEBUG: set_user_selected_algorithm error: {e}")
+            return False
+    
+    def get_algorithm_rating(self, algorithm_id):
+        """
+        アルゴリズムの評価を取得
+        
+        Args:
+            algorithm_id: アルゴリズムID
+            
+        Returns:
+            tuple: (rating, notes) 評価がない場合は (None, None)
+        """
+        if not self.logger:
+            return (None, None)
+        
+        try:
+            cursor = self.logger.cursor
+            cursor.execute(
+                "SELECT rating, notes FROM user_algorithm_ratings WHERE algorithm_id = ?",
+                (algorithm_id,)
+            )
+            result = cursor.fetchone()
+            return (result[0], result[1]) if result else (None, None)
+        except Exception as e:
+            print(f"DEBUG: get_algorithm_rating error: {e}")
+            return (None, None)
+    
+    def set_algorithm_rating(self, algorithm_id, rating, notes=""):
+        """
+        アルゴリズムの評価を保存
+        
+        Args:
+            algorithm_id: アルゴリズムID
+            rating: 評価（1-5）
+            notes: メモ（オプション）
+            
+        Returns:
+            bool: 成功した場合True
+        """
+        if not self.logger:
+            return False
+        
+        # 評価値の範囲チェック
+        if rating < 1 or rating > 5:
+            print(f"DEBUG: Invalid rating value: {rating}")
+            return False
+        
+        try:
+            cursor = self.logger.cursor
+            cursor.execute(
+                """
+                INSERT OR REPLACE INTO user_algorithm_ratings 
+                (algorithm_id, rating, notes, last_updated)
+                VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+                """,
+                (algorithm_id, rating, notes)
+            )
+            self.logger.conn.commit()
+            return True
+        except Exception as e:
+            print(f"DEBUG: set_algorithm_rating error: {e}")
+            return False

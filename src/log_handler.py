@@ -73,6 +73,57 @@ class SpeedcubeLogger:
                 )
             ''')
             
+            # パターン解法記録テーブルの作成（Phase 1: パターン習得モード用）
+            self.cursor.execute('''
+                CREATE TABLE IF NOT EXISTS pattern_solves (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    pattern_id TEXT NOT NULL,
+                    pattern_name TEXT NOT NULL,
+                    pattern_category TEXT NOT NULL,
+                    solve_time REAL NOT NULL,
+                    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    session_id TEXT,
+                    practice_mode TEXT,
+                    set_id TEXT,
+                    algorithm_id TEXT
+                )
+            ''')
+            
+            # パターン用インデックスの作成
+            self.cursor.execute('''
+                CREATE INDEX IF NOT EXISTS idx_pattern_solves_pattern_id 
+                ON pattern_solves(pattern_id)
+            ''')
+            
+            self.cursor.execute('''
+                CREATE INDEX IF NOT EXISTS idx_pattern_solves_category 
+                ON pattern_solves(pattern_category)
+            ''')
+            
+            self.cursor.execute('''
+                CREATE INDEX IF NOT EXISTS idx_pattern_solves_timestamp 
+                ON pattern_solves(timestamp)
+            ''')
+            
+            # ユーザーのパターン別アルゴリズム選択設定テーブル（Phase 2用）
+            self.cursor.execute('''
+                CREATE TABLE IF NOT EXISTS user_pattern_preferences (
+                    pattern_id TEXT PRIMARY KEY,
+                    selected_algorithm_id TEXT NOT NULL,
+                    last_updated DATETIME DEFAULT CURRENT_TIMESTAMP
+                )
+            ''')
+            
+            # ユーザーのアルゴリズム評価テーブル（Phase 2用）
+            self.cursor.execute('''
+                CREATE TABLE IF NOT EXISTS user_algorithm_ratings (
+                    algorithm_id TEXT PRIMARY KEY,
+                    rating INTEGER CHECK(rating >= 1 AND rating <= 5),
+                    notes TEXT,
+                    last_updated DATETIME DEFAULT CURRENT_TIMESTAMP
+                )
+            ''')
+            
             self.conn.commit()
         except sqlite3.Error as e:
             raise SpeedcubeLoggerError(f"データベースの初期化に失敗しました: {str(e)}")
